@@ -61,7 +61,7 @@ const Header = () => {
                   <input
                     style={{
                       background: "#F2F0F9",
-                      borderRadius: "3px",
+                      borderRadius: "4px",
                       border: "none",
                       outline: "none",
                       width: "100%",
