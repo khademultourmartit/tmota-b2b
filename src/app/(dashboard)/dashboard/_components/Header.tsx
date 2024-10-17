@@ -7,8 +7,8 @@ import Image from "next/image";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 const Header = () => {
+  
   const [viewClicked, setViewClicked] = useState(false);
-
   const handleViewClick = () => {
     setViewClicked(!viewClicked);
   };

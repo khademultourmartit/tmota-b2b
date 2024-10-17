@@ -16,7 +16,10 @@ interface AirportListsCardProps {
   getSuggestedText: (item: AirportData) => void;
 }
 
-const AirportListsCard: React.FC<AirportListsCardProps> = ({ airportData, getSuggestedText }) => {
+const AirportListsCard: React.FC<AirportListsCardProps> = ({
+  airportData,
+  getSuggestedText,
+}) => {
   return (
     <Box
       sx={{
@@ -42,7 +45,7 @@ const AirportListsCard: React.FC<AirportListsCardProps> = ({ airportData, getSug
                 padding: "10px",
                 cursor: "pointer",
               }}
-              onClick={() => getSuggestedText(item)}
+              // onClick={() => getSuggestedText(item)}
             >
               <Box
                 sx={{
@@ -131,16 +134,13 @@ const AirportListsCard: React.FC<AirportListsCardProps> = ({ airportData, getSug
                       >
                         {data?.cityName}, {data?.countryName}
                       </Typography>
-                      <Typography
-                        sx={{ color: "#6E6996", fontSize: "10px" }}
-                      >
+                      <Typography sx={{ color: "#6E6996", fontSize: "10px" }}>
                         {data?.airportName}
                       </Typography>
                     </Box>
                   </Box>
                 ))
               ) : (
-                // Handle single airport case without nested airports
                 <Box
                   sx={{
                     display: "flex",
@@ -179,9 +179,7 @@ const AirportListsCard: React.FC<AirportListsCardProps> = ({ airportData, getSug
                     >
                       {item?.cityName}, {item?.countryName}
                     </Typography>
-                    <Typography
-                      sx={{ color: "#6E6996", fontSize: "10px" }}
-                    >
+                    <Typography sx={{ color: "#6E6996", fontSize: "10px" }}>
                       {item?.airportName}
                     </Typography>
                   </Box>

@@ -136,6 +136,8 @@ const SearchBox = () => {
     countryName: "Bangladesh",
   });
 
+  console.log("fromSearchText", fromSearchText);
+
   const [toSearchText, setToSearchText] = useState({
     airportCode: "CXB",
     airportName: "Coxs Bazar Airport",
