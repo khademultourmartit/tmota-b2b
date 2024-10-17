@@ -409,6 +409,7 @@ const SearchBox = () => {
     const bodyString = JSON.stringify(body);
     secureLocalStorage.setItem("onewaybody", JSON.stringify(body));
     router.push(`/flight-list`);
+
     // axios
     //   .post("http://82.112.238.135:112/api/flight/flight-search", bodyString, {
     //     headers: {
@@ -512,9 +513,9 @@ const SearchBox = () => {
           </Typography>
         </Box>
 
-        <Box mt={3}>
+        {/* <Box mt={3}>
           <HomeSlider />
-        </Box>
+        </Box> */}
       </Box>
     </CustomClickAwayListener>
   );

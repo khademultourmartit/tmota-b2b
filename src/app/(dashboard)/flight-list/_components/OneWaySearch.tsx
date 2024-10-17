@@ -12,6 +12,8 @@ const OnewaySearch = () => {
   const [airlineData, setAirLineData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log("searchResults", searchResults);
+
   useEffect(() => {
     axios
       .post(
@@ -39,7 +41,6 @@ const OnewaySearch = () => {
         console.error("Search Error:", error);
       });
   }, [secureLocalStorage.getItem("onewaybody")]);
-
   return (
     <Box>
       <Typography>One Way search Result</Typography>
