@@ -1,6 +1,7 @@
 "use client";
 
 import CardWrapper from "@/app/(dashboard)/flight-list/_components/CardWrapper";
+import { projectConfig } from "@/config";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -20,7 +21,7 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "http://82.112.238.135:112/auth/login",
+          `${projectConfig.apiBaseUrl}/auth/login`,
           values
         );
         router.push("/dashboard");
