@@ -508,7 +508,7 @@ const SearchBox = () => {
             <Marquee>
               Notice, news and offers will be scroll here | Notice, news and
               offers will be scroll here Notice, news and offers will be scroll
-              here | Notice, news and offers will be scroll here
+              here | Notice, news and offers will be scroll
             </Marquee>
           </Typography>
         </Box>
