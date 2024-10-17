@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";

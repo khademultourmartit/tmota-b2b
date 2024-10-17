@@ -1,9 +1,9 @@
-import Header from "@/components/global/Header/Header";
-import Sidebar from "@/components/global/Sidebar/Sidebar";
+import Header from "@/app/(dashboard)/dashboard/_components/Header";
+import Sidebar from "@/app/(dashboard)/dashboard/_components/Sidebar";
 import { Container } from "@mui/material";
 import React from "react";
 
-const  DashboardLayoutGroup = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Container maxWidth="xl">
@@ -27,4 +27,4 @@ const  DashboardLayoutGroup = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default  DashboardLayoutGroup;
+export default DashboardLayout;

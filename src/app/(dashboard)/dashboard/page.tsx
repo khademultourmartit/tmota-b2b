@@ -1,10 +1,11 @@
 "use client";
-import DashboardPage from "@/components/pages/DashboardPage/DashboardPage";
+
+import SearchBox from "../flight-list/_components/SearchBox";
 
 const page = () => {
   return (
     <>
-      <DashboardPage />
+      <SearchBox />
     </>
   );
 };

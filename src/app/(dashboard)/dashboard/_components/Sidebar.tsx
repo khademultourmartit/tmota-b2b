@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Box, Container } from "@mui/material";
-import { sidebarMenu } from "../../../../public/data-source/sidebar-menu";
+import { sidebarMenu } from "../../../../../public/data-source/sidebar-menu";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);

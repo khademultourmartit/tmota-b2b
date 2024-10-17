@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
-import logo from "../../../../public/assests/image/logo.svg";
+import { Box, Grid } from "@mui/material";
+import logo from "../../../../../public/assests/image/logo.svg";
 import SearchIcon from "@mui/icons-material/Search";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Image from "next/image";

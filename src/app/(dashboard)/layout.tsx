@@ -1,6 +1,6 @@
 "use client";
 
-import DashboardLayoutGroup from "@/components/layout/DashboardLayoutGroup/DashboardLayoutGroup";
+import DashboardLayoutGroup from "./dashboard/_components/DashboardLayout";
 
 export default function DashboardLayout({
   children,

@@ -23,10 +23,10 @@ import FlightSearchBar from "@/app/(dashboard)/flight-list/_components/FlightSea
 import CardWrapper from "@/app/(dashboard)/flight-list/_components/CardWrapper";
 import Marquee from "react-fast-marquee";
 import OnewayAndRoundway from "./OnewayAndRoundway";
-import HomeSlider from "../../../../components/global/HomeSlider/HomeSlider";
 import { storeSearchResults } from "@/redux/slices/onewaySlice";
 import { useDispatch } from "react-redux";
 import secureLocalStorage from "react-secure-storage";
+import HomeSlider from "../../dashboard/_components/HomeSlider";
 type MenuItem = {
   name: string;
   icon: string;
@@ -512,9 +512,9 @@ const SearchBox = () => {
           </Typography>
         </Box>
 
-        {/* <Box mt={3}>
+        <Box mt={3}>
           <HomeSlider />
-        </Box> */}
+        </Box>
       </Box>
     </CustomClickAwayListener>
   );

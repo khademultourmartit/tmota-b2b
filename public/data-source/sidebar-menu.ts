@@ -29,7 +29,7 @@ export const sidebarMenu = [
     isEnabled: true,
     isAccessable: true,
     icon: Bookings,
-    path: "/user/profile",
+    path: "#",
   },
   {
     name: "Vendor",
@@ -37,7 +37,7 @@ export const sidebarMenu = [
     isEnabled: true,
     isAccessable: true,
     icon: VendorIcon,
-    path: "/dashboard/vendorlisttable",
+    path: "#",
   },
   {
     name: "Agent",
@@ -45,7 +45,7 @@ export const sidebarMenu = [
     isEnabled: true,
     isAccessable: true,
     icon: Agent,
-    path: "/dashboard/agent-list",
+    path: "#",
   },
   {
     name: "Customer",
@@ -53,7 +53,7 @@ export const sidebarMenu = [
     isEnabled: true,
     isAccessable: true,
     icon: Customer,
-    path: "/dashboard/customerlisttable",
+    path: "#",
   },
   {
     name: "Market",
@@ -61,7 +61,7 @@ export const sidebarMenu = [
     isEnabled: true,
     isAccessable: true,
     icon: MarketSales,
-    path: "/dashboard/user-markup-commission-list",
+    path: "#",
   },
   {
     name: "Promotion",
