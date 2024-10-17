@@ -1,8 +1,9 @@
+"use client";
+
 import CardWrapper from "@/components/global/CardWrapper/CardWrapper";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 

@@ -1,14 +1,12 @@
-'use client'
-import DashboardPage from '@/components/pages/DashboardPage/DashboardPage'
-
+"use client";
+import DashboardPage from "@/components/pages/DashboardPage/DashboardPage";
 
 const page = () => {
   return (
     <>
-    <DashboardPage/>
-    
+      <DashboardPage />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

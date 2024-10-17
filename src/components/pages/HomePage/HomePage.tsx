@@ -6,10 +6,8 @@ export default function HomePage() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-<Link href='/login'>
-<Button variant="contained">
-        Login
-        </Button>
+        <Link href="/login">
+          <Button variant="contained">Login</Button>
         </Link>
       </main>
     </div>

@@ -2,8 +2,6 @@
 
 import DashboardLayoutGroup from "@/components/layout/DashboardLayoutGroup/DashboardLayoutGroup";
 
-
-
 export default function DashboardLayout({
   children,
 }: {
@@ -12,9 +10,7 @@ export default function DashboardLayout({
   return (
     <html lang="en">
       <body style={{ backgroundColor: "#F2F0F9" }}>
-      <DashboardLayoutGroup>
-        {children}
-      </ DashboardLayoutGroup>
+        <DashboardLayoutGroup>{children}</DashboardLayoutGroup>
       </body>
     </html>
   );

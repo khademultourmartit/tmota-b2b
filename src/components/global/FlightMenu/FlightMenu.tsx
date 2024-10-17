@@ -1,4 +1,4 @@
-import { flightMenu } from "@/constants/flightMenu";
+import { flightMenu } from "@/constants/flight-menu";
 import { Box, Button } from "@mui/material";
 import React from "react";
 
