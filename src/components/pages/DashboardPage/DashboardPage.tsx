@@ -1,12 +1,8 @@
-
 import React from "react";
-import SearchBox from "@/components/global/SearchBox/SearchBox";
+import SearchBox from "@/app/(dashboard)/flight-list/_components/SearchBox";
 
 const DashboardPage = () => {
-
-  return (
-  <SearchBox/>
-  );
+  return <SearchBox />;
 };
 
 export default DashboardPage;

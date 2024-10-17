@@ -17,13 +17,13 @@ import moment from "moment";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-import CustomClickAwayListener from "@/components/global/CustomClickAwayListener/CustomClickAwayListener";
-import FlightMenu from "@/components/global/FlightMenu/FlightMenu";
-import FlightSearchBar from "@/components/global/FlightSearchBar/FlightSearchBar";
-import CardWrapper from "@/components/global/CardWrapper/CardWrapper";
+import CustomClickAwayListener from "@/app/(dashboard)/flight-list/_components/CustomClickAwayListener";
+import FlightMenu from "@/app/(dashboard)/flight-list/_components/FlightMenu";
+import FlightSearchBar from "@/app/(dashboard)/flight-list/_components/FlightSearchBar";
+import CardWrapper from "@/app/(dashboard)/flight-list/_components/CardWrapper";
 import Marquee from "react-fast-marquee";
 import OnewayAndRoundway from "./OnewayAndRoundway";
-import HomeSlider from "../HomeSlider/HomeSlider";
+import HomeSlider from "../../../../components/global/HomeSlider/HomeSlider";
 import { storeSearchResults } from "@/redux/slices/onewaySlice";
 import { useDispatch } from "react-redux";
 import secureLocalStorage from "react-secure-storage";
@@ -408,7 +408,7 @@ const SearchBox = () => {
     };
     const bodyString = JSON.stringify(body);
     secureLocalStorage.setItem("onewaybody", JSON.stringify(body));
-    router.push(`/dashboard/OnewaySearchResults`);
+    router.push(`/flight-list`);
     // axios
     //   .post("http://82.112.238.135:112/api/flight/flight-search", bodyString, {
     //     headers: {

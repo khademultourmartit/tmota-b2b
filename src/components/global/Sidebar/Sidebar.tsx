@@ -3,22 +3,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Logo from "../../../../public/assests/menuicon/Logo.svg";
-import Dashboardicon from "../../../../public/assests/menuicon/dashboardicon.svg";
-import Bookings from "../../../../public/assests/menuicon/bookingsIcon.svg";
-import VendorIcon from "../../../../public/assests/menuicon/Vendoricon.svg";
-import Agent from "../../../../public/assests/menuicon/AgentIcon.svg";
-import Customer from "../../../../public/assests/menuicon/Customericon.svg";
-import MarketSales from "../../../../public/assests/menuicon/Salesicon.svg";
-import Promotion from "../../../../public/assests/menuicon/Dealsicon.svg";
-import Accounts from "../../../../public/assests/menuicon/Accountsicon.svg";
-import Transaction from "../../../public/assests/menuicon/Transactionicon.svg";
-import Journal from "../../../../public/assests/menuicon/Journalicon.svg";
-import Employee from "../../../../public/assests/menuicon/Employeeicon.svg";
-import Reports from "../../../../public/assests/menuicon/Reportsicon.svg";
-import Settings from "../../../../public/assests/menuicon/Settingsicon.svg";
-import LogOut from "../../../../public/assests/menuicon/Logoutiutton.svg";
 import { Box, Container } from "@mui/material";
+import { sidebarMenu } from "../../../../public/data-source/sidebar-menu";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -34,24 +20,7 @@ const Sidebar = () => {
     subMenu?: MenuItem[];
   };
 
-  const menuItem: MenuItem[] = [
-    { path: "/dashboard", name: "Dashboard", icon: Dashboardicon },
-    { path: "/user/profile", name: "Profile", icon: Bookings },
-    { path: "/dashboard/vendorlisttable", name: "Vendor", icon: VendorIcon },
-    { path: "/dashboard/agent-list", name: "Agent", icon: Agent },
-    { path: "/dashboard/customerlisttable", name: "Customer", icon: Customer },
-    {
-      path: "/dashboard/user-markup-commission-list",
-      name: "Market",
-      icon: MarketSales,
-    },
-    { path: "#", name: "Promotion", icon: Promotion },
-    // {
-    //   path: "/dashboard/company-bank-list-table",
-    //   name: "Accounts",
-    //   icon: Accounts,
-    // },
-  ];
+  const menuItem: MenuItem[] = sidebarMenu;
 
   const linkStyle = (path: string) => ({
     display: "flex",

@@ -1,20 +1,21 @@
 import { Box, Grid, Stack, Typography, styled } from "@mui/material";
 import React, { useState } from "react";
-import FlightClassNamesBox from "../FlightClassNamesBox/FlightClassNamesBox";
-import TravelerBox from "../TravelerBox/TravelerBox";
+import FlightClassNamesBox from "./FlightClassNamesBox";
+import TravelerBox from "./TravelerBox";
 import { Calendar, DateRange, DateRangePicker } from "react-date-range";
 import moment from "moment";
-import Plan from "../../../../public/assests/searchIcon/plan.svg";
-import ToPlane from "../../../../public/assests/searchIcon/ToPlane.svg";
-import calender from "../../../../public/assests/searchIcon/calender.svg";
-import reverse from "../../../../public/assests/searchIcon/reverse.svg";
+import Plan from "../../../../../public/assests/searchIcon/plan.svg";
+import ToPlane from "../../../../../public/assests/searchIcon/ToPlane.svg";
+import calender from "../../../../../public/assests/searchIcon/calender.svg";
+import reverse from "../../../../../public/assests/searchIcon/reverse.svg";
 import AddIcon from "@mui/icons-material/Add";
 import Radio from "@mui/material/Radio";
 import Image from "next/image";
-import AirportListsCard from "../AirportListsCard/AirportListsCard";
-import SamePlaceError from "../SamePlaceError/SamePlaceError";
+import AirportListsCard from "./AirportListsCard";
+import SamePlaceError from "./SamePlaceError";
 import Link from "next/link";
 import zIndex from "@mui/material/styles/zIndex";
+
 const OnewayAndRoundway = ({
   openFrom,
   openTo,

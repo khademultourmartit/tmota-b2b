@@ -1,6 +1,7 @@
 import { Alert, Stack } from "@mui/material";
 import React from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+
 const SamePlaceError = () => {
   return (
     <>
@@ -17,7 +18,7 @@ const SamePlaceError = () => {
           severity="error"
           sx={{ fontSize: "11px" }}
         >
-          Can't choose same place!
+          Cannot choose same place!
         </Alert>
       </Stack>
     </>

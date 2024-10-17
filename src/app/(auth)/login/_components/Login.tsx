@@ -1,6 +1,6 @@
 "use client";
 
-import CardWrapper from "@/components/global/CardWrapper/CardWrapper";
+import CardWrapper from "@/app/(dashboard)/flight-list/_components/CardWrapper";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
