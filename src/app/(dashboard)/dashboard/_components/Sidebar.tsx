@@ -49,7 +49,7 @@ const Sidebar = () => {
           color: "#B4B4CD",
           borderRadius: "5px",
           height: "100%",
-          width: isOpen ? "170px" : "84px",
+          width: isOpen ? "195px" : "84px",
           boxShadow: "rgba(234, 232, 244, 0.95) 0px 0px 25px 0px",
           display: "flex",
           flexDirection: "column",

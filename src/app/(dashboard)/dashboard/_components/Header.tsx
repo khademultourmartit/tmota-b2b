@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <Box mb={5} mt={2}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={1.5}>
+        <Grid item xs={12} sm={12} md={3} lg={1.3}>
           <Box
             sx={{
               boxShadow: "rgba(234, 232, 244, 0.95) 0px 0px 25px 0px",
@@ -29,7 +29,8 @@ const Header = () => {
             <Image width={120} src={logo} alt="logo" />
           </Box>
         </Grid>
-        <Grid item xs={12} sm={6} md={10.5}>
+
+        <Grid item xs={12} sm={12} md={10.7}>
           <Box
             sx={{
               boxShadow: "rgba(234, 232, 244, 0.95) 0px 0px 25px 0px",

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import OnewaySearch from "./_components/OneWaySearch";
 import RoundwaySearch from "./_components/RoundWaySearch";
@@ -10,7 +9,6 @@ const page = () => {
   return (
     <div>
       <OnewaySearch />
-      {/* <RoundwaySearch /> */}
     </div>
   );
 };
