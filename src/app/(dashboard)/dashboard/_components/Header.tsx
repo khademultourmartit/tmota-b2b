@@ -7,7 +7,6 @@ import Image from "next/image";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 const Header = () => {
-  
   const [viewClicked, setViewClicked] = useState(false);
   const handleViewClick = () => {
     setViewClicked(!viewClicked);
@@ -16,7 +15,7 @@ const Header = () => {
   return (
     <Box mb={5} mt={2}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={3} lg={1.3}>
+        <Grid item xs={12} sm={3} md={1.5} lg={1.5}>
           <Box
             sx={{
               boxShadow: "rgba(234, 232, 244, 0.95) 0px 0px 25px 0px",
@@ -30,7 +29,7 @@ const Header = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={10.7}>
+        <Grid item xs={12} sm={9} md={10.5} lg={10.5}>
           <Box
             sx={{
               boxShadow: "rgba(234, 232, 244, 0.95) 0px 0px 25px 0px",

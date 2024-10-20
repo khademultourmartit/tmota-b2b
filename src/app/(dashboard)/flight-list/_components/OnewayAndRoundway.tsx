@@ -75,8 +75,6 @@ const OnewayAndRoundway = ({
     },
   ]);
 
-  console.log("airportData", airportData);
-
   const handleSelectReturnDate = (ranges: any) => {
     setDateRange([ranges.selection]);
     setJourneyDate(ranges.selection.startDate);
@@ -321,7 +319,7 @@ const OnewayAndRoundway = ({
 
               {openFrom && (
                 <Box
-                  style={{
+                  sx={{
                     position: "absolute",
                     top: "120%",
                     left: "0",
@@ -341,8 +339,8 @@ const OnewayAndRoundway = ({
                 onClick={handleReverseDestination}
                 style={{
                   position: "absolute",
-                  right: "0px",
-                  top: "15px",
+                  right: "35px",
+                  top: "20px",
                   cursor: "pointer",
                 }}
                 width={40}

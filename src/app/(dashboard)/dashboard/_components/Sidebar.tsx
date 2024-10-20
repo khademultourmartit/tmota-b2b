@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { sidebarMenu } from "../../../../../public/data-source/sidebar-menu";
 
 const Sidebar = () => {
@@ -49,7 +49,7 @@ const Sidebar = () => {
           color: "#B4B4CD",
           borderRadius: "5px",
           height: "100%",
-          width: isOpen ? "195px" : "84px",
+          // width: isOpen ? "195px" : "84px",
           boxShadow: "rgba(234, 232, 244, 0.95) 0px 0px 25px 0px",
           display: "flex",
           flexDirection: "column",
@@ -59,7 +59,6 @@ const Sidebar = () => {
           minHeight: "85vh",
         }}
       >
-        {/* Logo */}
         <Box
           style={{
             position: "absolute",
@@ -75,20 +74,8 @@ const Sidebar = () => {
             borderRadius: "50%",
             padding: "5px",
           }}
-        >
-          {/* <Image
-            onClick={toggle}
-            src={Logo}
-            alt="Logo"
-            style={{
-              width: "50px",
-              height: "auto",
-              cursor: "pointer",
-            }}
-          /> */}
-        </Box>
+        ></Box>
 
-        {/* Menu Items */}
         <Box>
           {menuItem.map((item, index) => (
             <React.Fragment key={index}>
