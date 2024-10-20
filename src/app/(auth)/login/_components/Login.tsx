@@ -7,6 +7,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import React from "react";
+import secureLocalStorage from "react-secure-storage";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -24,7 +25,14 @@ const LoginPage = () => {
           `${projectConfig.apiBaseUrl}/auth/login`,
           values
         );
-        router.push("/dashboard");
+
+        if (response?.status === 201) {
+          secureLocalStorage.setItem(
+            "token",
+            response?.data?.payload?.access_token
+          );
+          router.push("/dashboard");
+        }
       } catch (error) {
         console.error("Login failed:", error);
       }

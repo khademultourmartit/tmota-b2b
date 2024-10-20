@@ -1,0 +1,147 @@
+import { Box, Skeleton, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import secureLocalStorage from "react-secure-storage";
+import axios from "axios";
+
+function HomeSlider() {
+  const token = secureLocalStorage.getItem("token");
+
+  const [slider, setSlider] = useState([]);
+  const [slideLoad, setSlideLoad] = useState([1, 2]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://82.112.238.135:88/banners?page=1&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setSlider(response.data?.payload?.data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const len = slider?.length > 4 ? 4 : slider?.length;
+  const laptopLen = slider?.length >= 3 ? 3 : slider?.length;
+  const tabLen = slider?.length >= 2 ? 2 : slider?.length;
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: len,
+    slidesToScroll: 1,
+    initialSlide: 2,
+    autoplay: true,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: laptopLen,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: tabLen,
+          slidesToScroll: 2,
+          initialSlide: len,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 200,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  return (
+    <div>
+      <Box
+        sx={{
+          display: { md: `${len > 3 ? "block" : "flex"}` },
+          justifyContent: { md: `${len > 3 ? "start" : "center"}` },
+        }}
+      >
+        <Slider {...settings}>
+          {slider.length !== 0 ? (
+            <>
+              {slider?.map((data) => (
+                <Box
+                  key={data?.id}
+                  sx={{
+                    backgroundImage: `url(${data?.imgUrl})`,
+                    width: "100%",
+                    height: "200px",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "bottom",
+                  }}
+                ></Box>
+              ))}
+            </>
+          ) : (
+            <>
+              {slideLoad?.map(function (slide) {
+                return (
+                  <div key={slide}>
+                    <Box
+                      sx={{
+                        bgcolor: "var(--white)",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <Box>
+                        <Box
+                          sx={{
+                            width: "100%",
+                            height: "230px",
+                            borderRadius: "5px",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <Skeleton
+                            sx={{ borderRadius: "5px" }}
+                            variant="rectangular"
+                            width={"100%"}
+                            height={"100%"}
+                          />
+                        </Box>
+                      </Box>
+                    </Box>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </Slider>
+      </Box>
+    </div>
+  );
+}
+
+export default HomeSlider;

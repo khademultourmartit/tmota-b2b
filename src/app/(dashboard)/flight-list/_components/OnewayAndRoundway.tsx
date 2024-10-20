@@ -744,7 +744,7 @@ const OnewayAndRoundway = ({
                         padding: "5px 0px",
                         textAlign: "center",
                         color: "#ffffff",
-                        fontSize: "14px",
+                        fontSize: "
                       }}
                     >
                       {differenceInDays + 1} Days

@@ -41,6 +41,7 @@ const AirlinesSlider = ({ airlineData }: any) => {
       </div>
     );
   };
+
   const CustomPrevArrow = (props: any) => {
     const { onClick } = props;
 

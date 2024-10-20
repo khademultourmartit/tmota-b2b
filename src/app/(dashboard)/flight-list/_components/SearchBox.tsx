@@ -513,9 +513,9 @@ const SearchBox = () => {
           </Typography>
         </Box>
 
-        {/* <Box mt={3}>
+        <Box mt={3}>
           <HomeSlider />
-        </Box> */}
+        </Box>
       </Box>
     </CustomClickAwayListener>
   );

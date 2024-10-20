@@ -1,37 +1,133 @@
-import { Box, Skeleton } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Skeleton, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import secureLocalStorage from "react-secure-storage";
+import axios from "axios";
 
 function HomeSlider() {
-  
-  const [slideLoad, setSlideLoad] = useState([1, 2, 3, 4, 5]);
-  const slideWidth = 420;
-  const slideGap = 20;
+  const token = secureLocalStorage.getItem("token");
+
+  const [slider, setSlider] = useState([]);
+  const [slideLoad, setSlideLoad] = useState([1, 2, 3, 4]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://82.112.238.135:88/banners?page=1&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setSlider(response.data?.payload?.data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const len = slider?.length > 4 ? 4 : slider?.length;
+  const laptopLen = slider?.length >= 3 ? 3 : slider?.length;
+  const tabLen = slider?.length >= 2 ? 2 : slider?.length;
+
+  const CustomNextArrow = (props: any) => {
+    const { onClick } = props;
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          backgroundColor: "var(--primary-color)",
+          width: "25px",
+          position: "absolute",
+          height: "100%",
+          right: "-20px",
+          top: "-100px",
+          zIndex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "40px",
+            margin: "0",
+            color: "#a56eb4",
+          }}
+        >
+          &#8250;
+        </p>
+      </div>
+    );
+  };
+
+  const CustomPrevArrow = (props: any) => {
+    const { onClick } = props;
+
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          width: "25px",
+          position: "absolute",
+          height: "100%",
+          left: "-20px",
+          top: "-100px",
+          zIndex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "40px",
+            margin: "0",
+            color: "#a56eb4",
+          }}
+        >
+          &#8249;
+        </p>
+      </div>
+    );
+  };
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: Math.min(slideLoad.length, 3),
+    slidesToShow: len,
     slidesToScroll: 1,
-    initialSlide: 0,
-    arrows: false,
+    initialSlide: 2,
     autoplay: true,
+    arrows: true,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
+
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: Math.min(slideLoad.length, 2),
-          slidesToScroll: 1,
+          slidesToShow: laptopLen,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: false,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
-          slidesToShow: Math.min(slideLoad.length, 1),
-          slidesToScroll: 1,
+          slidesToShow: tabLen,
+          slidesToScroll: 2,
+          initialSlide: len,
         },
       },
       {
@@ -41,53 +137,96 @@ function HomeSlider() {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 200,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
     ],
   };
 
   return (
-    <div
-      style={{
-        maxWidth: `${slideWidth * 3 + slideGap * 2}px`,
-        margin: "0 auto",
+    <Box
+      sx={{
+        display: { md: `${len > 3 ? "block" : "flex"}` },
+        justifyContent: { md: `${len > 3 ? "start" : "center"}` },
       }}
     >
-      <Box>
-        <Slider {...settings}>
-          {slideLoad?.map(function (slide) {
-            return (
-              <div key={slide}>
+      {slider.length !== 0 ? (
+        <>
+          <Slider {...settings}>
+            {slider?.map((data: any, arr: any, index: any) => (
+              <div key={index}>
                 <Box
                   sx={{
                     bgcolor: "var(--white)",
-                    borderRadius: "10px",
-                    width: `${slideWidth}px`,
-                    margin: `0 ${slideGap / 2}px`,
+                    overflow: "hidden",
+                    width: {
+                      xs: "100%",
+                      sm: `${arr.length < 4 ? "180px" : null}`,
+                      md: `${arr.length < 4 ? "180px" : null}`,
+                    },
+                    height: "380px",
+                    cursor: "pointer",
+                    position: "relative",
                   }}
                 >
-                  <Box>
+                  <Box className="tours-box">
                     <Box
                       sx={{
-                        width: "100%",
-                        height: "230px",
-                        borderRadius: "5px",
-                        overflow: "hidden",
+                        backgroundImage: `url(${data?.imgUrl})`,
+                        width: "95%",
+                        height: "200px",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "bottom",
                       }}
-                    >
-                      <Skeleton
-                        sx={{ borderRadius: "5px" }}
-                        variant="rectangular"
-                        width={"100%"}
-                        height={"100%"}
-                      />
-                    </Box>
+                    ></Box>
                   </Box>
                 </Box>
               </div>
-            );
-          })}
-        </Slider>
-      </Box>
-    </div>
+            ))}
+          </Slider>
+        </>
+      ) : (
+        <>
+          <Slider {...settings}>
+            {slideLoad?.map(function (slide) {
+              return (
+                <div key={slide}>
+                  <Box
+                    sx={{
+                      bgcolor: "var(--white)",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <Box>
+                      <Box
+                        sx={{
+                          width: "95%",
+                          height: "200px",
+                          borderRadius: "5px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <Skeleton
+                          sx={{ borderRadius: "5px" }}
+                          variant="rectangular"
+                          width={"100%"}
+                          height={"100%"}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+                </div>
+              );
+            })}
+          </Slider>
+        </>
+      )}
+    </Box>
   );
 }
 
