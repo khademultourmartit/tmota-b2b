@@ -30,7 +30,10 @@ const FlightMenu = ({
             display: "flex",
             gap: "5px",
             fontSize: "13px",
-            height: "28px",
+            height: "30px",
+            justifyContent: "center",
+            alignItems: "centerz",
+            paddingTop: "8px",
           }}
         >
           {menu?.name}
