@@ -122,3 +122,65 @@ a {
   position: absolute;
   left: -3px;
 }
+
+/*  switch button  */
+
+.switch-image-btn {
+  position: absolute;
+  width: 20px;
+  right: 10px;
+  top: 25px;
+}
+
+@media (min-width: 1200px) {
+  .switch-image-btn {
+    width: 20px;
+    right: 10px;
+    top: 25px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .switch-image-btn {
+    width: 25px;
+    right: 35px;
+    top: 20px;
+  }
+}
+
+/* Medium devices (tablets, 768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .switch-image-btn {
+    width: 22px;
+    right: 30px;
+    top: 18px;
+  }
+}
+
+/* Small devices (phones, 576px to 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .switch-image-btn {
+    width: 20px;
+    right: 25px;
+    top: 15px;
+  }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575px) {
+  .switch-image-btn {
+    width: 15px;
+    right: 15px;
+    top: 10px;
+  }
+}
+
+/* Ultra-small devices (wearables, less than 400px) */
+@media (max-width: 400px) {
+  .switch-image-btn {
+    width: 12px;
+    right: 10px;
+    top: 8px;
+  }
+}

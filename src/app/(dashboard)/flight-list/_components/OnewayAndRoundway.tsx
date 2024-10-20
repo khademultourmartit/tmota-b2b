@@ -218,18 +218,17 @@ const OnewayAndRoundway = ({
           sm={12}
           md={12}
           lg={5.5}
-          sx={{
+          style={{
             border: "1px solid #D9D5EC",
             padding: "10px",
           }}
         >
-          {/* From arrival  airport */}
           <Grid
             item
             xs={12}
             sm={12}
-            md={12}
-            lg={5.5}
+            md={6}
+            lg={6}
             sx={{
               position: "relative",
             }}
@@ -337,25 +336,19 @@ const OnewayAndRoundway = ({
 
               <Image
                 onClick={handleReverseDestination}
-                style={{
-                  position: "absolute",
-                  right: "35px",
-                  top: "20px",
-                  cursor: "pointer",
-                }}
-                width={40}
+                className="switch-image-btn"
+                width={25}
                 src={reverse}
                 alt="reverse icon"
               />
             </Box>
           </Grid>
 
-          {/* To arrival airport */}
           <Grid
             item
             xs={12}
             sm={12}
-            md={12}
+            md={6}
             lg={6}
             sx={{
               position: "relative",
