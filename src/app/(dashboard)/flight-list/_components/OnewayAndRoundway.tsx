@@ -75,6 +75,8 @@ const OnewayAndRoundway = ({
     },
   ]);
 
+  console.log("airportData", airportData);
+
   const handleSelectReturnDate = (ranges: any) => {
     setDateRange([ranges.selection]);
     setJourneyDate(ranges.selection.startDate);

@@ -40,12 +40,11 @@ const AirportListsCard: React.FC<AirportListsCardProps> = ({
         {airportData?.length > 0 ? (
           airportData?.map((item) => (
             <Box
-              key={item?.id || item?.airportCode} // Ensure unique key
+              key={item?.id || item?.airportCode}
               sx={{
                 padding: "10px",
                 cursor: "pointer",
               }}
-              // onClick={() => getSuggestedText(item)}
             >
               <Box
                 sx={{
@@ -53,6 +52,7 @@ const AirportListsCard: React.FC<AirportListsCardProps> = ({
                   display: "flex",
                   justifyContent: "space-between",
                 }}
+                onClick={() => getSuggestedText(item)}
               >
                 <Typography
                   sx={{
