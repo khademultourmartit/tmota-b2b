@@ -208,7 +208,7 @@ const OnewayAndRoundway = ({
           width: "100%",
         }}
         container
-        rowSpacing={{ lg: 0, md: 1, sm: 1, xs: 1 }}
+        rowSpacing={{ lg: 0, md: 0, sm: 1, xs: 1 }}
         columnSpacing={0.1}
       >
         <Grid
@@ -216,10 +216,9 @@ const OnewayAndRoundway = ({
           container
           xs={12}
           sm={12}
-          md={12}
+          md={5.5}
           lg={5.5}
-          
-        sx={{
+          style={{
             border: "1px solid #D9D5EC",
             padding: "10px",
           }}
@@ -229,8 +228,8 @@ const OnewayAndRoundway = ({
             item
             xs={12}
             sm={12}
-            md={12}
-            lg={5.5}
+            md={6}
+            lg={6}
             sx={{
               position: "relative",
             }}
@@ -340,7 +339,7 @@ const OnewayAndRoundway = ({
                 onClick={handleReverseDestination}
                 style={{
                   position: "absolute",
-                  right: "0px",
+                  right: "22px",
                   top: "15px",
                   cursor: "pointer",
                 }}
@@ -356,7 +355,7 @@ const OnewayAndRoundway = ({
             item
             xs={12}
             sm={12}
-            md={12}
+            md={6}
             lg={6}
             sx={{
               position: "relative",
@@ -432,7 +431,6 @@ const OnewayAndRoundway = ({
                       sx={{
                         color: "#2D233C",
                         fontSize: "14px",
-                      textWrap:"nowrap"
                       }}
                     >
                       {toSearchText?.cityName},{toSearchText?.countryName}
@@ -472,24 +470,20 @@ const OnewayAndRoundway = ({
           container
           xs={12}
           sm={12}
-          md={12}
-          lg={3.4}
+          md={3.5}
+          lg={3.5}
           style={{
             border: "1px solid #D9D5EC",
             padding: "10px",
             position: "relative",
           }}
           ml={{
-        
-            md:0,
-            lg:1.5,
+            sm: 1.5,
             xs: 0,
           }}
           mt={{
             xs: 1,
             sm: 0,
-            md:1,
-            lg:0,
           }}
         >
           {currentMenu === "Oneway" && (
@@ -503,7 +497,7 @@ const OnewayAndRoundway = ({
                 position: "relative",
               }}
             >
-              <Box sx={{ display: "flex", justifyContent: "space-between",flexDirection:{md:'column',lg:"row"} }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Box
                   sx={{
                     cursor: "pointer",
@@ -764,15 +758,13 @@ const OnewayAndRoundway = ({
           item
           xs={12}
           sm={12}
-          md={12}
+          md={1.9}
           lg={1.9}
           sx={{
             position: "relative",
           }}
           ml={{
-  
-            md:0,
-            lg:1.5,
+            sm: 1.5,
             xs: 0,
           }}
           mt={{
@@ -875,15 +867,11 @@ const OnewayAndRoundway = ({
             </Box>
           </Box>
         </Grid>
-        
         <Grid
           item
-         xs={12}
-          lg={0.7}
+          md={0.7}
           ml={{
             sm: 1.5,
-            md:0,
-            lg:1.5,
             xs: 0,
           }}
           mt={{
@@ -911,7 +899,6 @@ const OnewayAndRoundway = ({
                   background: "none",
                   color: "#fff",
                   cursor: "pointer",
-                  
                 }}
               >
                 Search
