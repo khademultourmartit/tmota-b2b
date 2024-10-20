@@ -103,6 +103,7 @@ const BpCheckedIcon = styled(BpIcon)({
 
 const SearchBox = () => {
   const dispatch = useDispatch();
+  const token = secureLocalStorage.getItem("token");
   const [tabs, setTabs] = useState("Flight");
   const [currentMenu, setCurrentMenu] = useState("Oneway");
   const [travelerBoxOpen, setTravelerBoxOpen] = useState(false);
@@ -427,6 +428,24 @@ const SearchBox = () => {
     //   });
   };
 
+  const [notice, setNotice] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = `http://82.112.238.135:88/notices?page=1&limit=10`;
+      try {
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setNotice(response.data?.payload?.data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <CustomClickAwayListener handleClickAway={handleClickAway}>
       <Box>
@@ -506,9 +525,9 @@ const SearchBox = () => {
             }}
           >
             <Marquee>
-              Notice, news and offers will be scroll here | Notice, news and
-              offers will be scroll here Notice, news and offers will be scroll
-              here | Notice, news and offers will be scroll
+              {notice?.map((data: any) => (
+                <span key={data?.id}>{data?.description}</span>
+              ))}
             </Marquee>
           </Typography>
         </Box>
