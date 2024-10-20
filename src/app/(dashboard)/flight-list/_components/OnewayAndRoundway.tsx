@@ -465,7 +465,7 @@ const OnewayAndRoundway = ({
           xs={12}
           sm={12}
           md={12}
-          lg={3.4}
+          lg={3.5}
           style={{
             border: "1px solid #D9D5EC",
             padding: "10px",
@@ -594,7 +594,7 @@ const OnewayAndRoundway = ({
               </Box>
 
               {openJourneyDate && (
-                <Box className="DatePicker-style">
+                <Box>
                   <Calendar
                     className={"dashboard-calendar"}
                     color="#A56EB4"
@@ -736,9 +736,9 @@ const OnewayAndRoundway = ({
                     months={2}
                     rangeColors={["#A56EB4"]}
                     direction="horizontal"
-                    className={"return-calendar "}
+                    className={"return-calendar"}
                   />
-                  <Box className={"return-date-count"}>
+                  {/* <Box className={"return-date-count"}>
                     <Typography
                       sx={{
                         padding: "5px 0px",
@@ -749,7 +749,7 @@ const OnewayAndRoundway = ({
                     >
                       {differenceInDays + 1} Days
                     </Typography>
-                  </Box>
+                  </Box> */}
                 </Box>
               )}
             </Grid>
@@ -762,7 +762,7 @@ const OnewayAndRoundway = ({
           xs={12}
           sm={12}
           md={12}
-          lg={1.9}
+          lg={1.8}
           sx={{
             position: "relative",
           }}
