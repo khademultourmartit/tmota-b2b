@@ -28,7 +28,6 @@ const Header = () => {
             <Image width={120} src={logo} alt="logo" />
           </Box>
         </Grid>
-
         <Grid item xs={12} sm={9} md={10.5} lg={10.5}>
           <Box
             sx={{

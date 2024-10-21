@@ -217,7 +217,7 @@ const OnewayAndRoundway = ({
           xs={12}
           sm={12}
           md={12}
-          lg={5.5}
+          lg={5.4}
           style={{
             border: "1px solid #D9D5EC",
             padding: "10px",
@@ -238,6 +238,7 @@ const OnewayAndRoundway = ({
               setOpenTo(false);
               setTravelerBoxOpen(false);
               setClassBoxOpen(false);
+              setOpenReturnDate(false);
             }}
           >
             <Box sx={{ position: "relative" }}>
@@ -358,6 +359,7 @@ const OnewayAndRoundway = ({
               setOpenFrom(false);
               setTravelerBoxOpen(false);
               setClassBoxOpen(false);
+              setOpenReturnDate(false);
             }}
           >
             <Box>
@@ -465,7 +467,7 @@ const OnewayAndRoundway = ({
           xs={12}
           sm={12}
           md={12}
-          lg={3.5}
+          lg={3.6}
           style={{
             border: "1px solid #D9D5EC",
             padding: "10px",
@@ -738,13 +740,14 @@ const OnewayAndRoundway = ({
                     direction="horizontal"
                     className={"return-calendar"}
                   />
+
                   {/* <Box className={"return-date-count"}>
                     <Typography
                       sx={{
                         padding: "5px 0px",
                         textAlign: "center",
                         color: "#ffffff",
-                        fontSize: "
+                        fontSize: "12px",
                       }}
                     >
                       {differenceInDays + 1} Days
@@ -795,12 +798,13 @@ const OnewayAndRoundway = ({
                   setOpenFrom(false);
                   setOpenTo(false);
                   setTravelerBoxOpen(false);
+                  setOpenReturnDate(false);
                 }}
               >
                 <Image src={calender} alt="plan Icon" />
                 <Typography
                   sx={{
-                    fontSize: "15px",
+                    fontSize: "14px",
                     color: "#2D233C",
                     fontWeight: 500,
                   }}
@@ -814,7 +818,7 @@ const OnewayAndRoundway = ({
                   border: "1px solid #D9D5EC",
                   width: "100%",
                 }}
-                my={1}
+                my={1.5}
               ></Box>
               <Box
                 sx={{
@@ -828,12 +832,13 @@ const OnewayAndRoundway = ({
                   setOpenFrom(false);
                   setOpenTo(false);
                   setClassBoxOpen(false);
+                  setOpenReturnDate(false);
                 }}
               >
                 <Image src={calender} alt="plan Icon" />
                 <Typography
                   sx={{
-                    fontSize: "15px",
+                    fontSize: "14px",
                     color: "#2D233C",
                     fontWeight: 500,
                   }}
@@ -888,31 +893,19 @@ const OnewayAndRoundway = ({
           }}
           onClick={handleSearch}
         >
-          <Box
-            sx={{
-              display: "flex",
-              gap: "15px",
+          <button
+            style={{
+              border: "none",
               background: "#A56EB4",
-              borderRadius: "3px",
+              color: "#fff",
               cursor: "pointer",
+              width: "100%",
               height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
+              borderRadius: "3px",
             }}
           >
-            <Box>
-              <button
-                style={{
-                  border: "none",
-                  background: "none",
-                  color: "#fff",
-                  cursor: "pointer",
-                }}
-              >
-                Search
-              </button>
-            </Box>
-          </Box>
+            Search
+          </button>
         </Grid>
       </Grid>
     </>

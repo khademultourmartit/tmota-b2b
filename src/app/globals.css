@@ -63,10 +63,10 @@ a {
 
 .return-date-count {
   position: absolute;
-  bottom: -650%;
-  left: -10px;
+  top: 360px;
+  left: -102px;
   z-index: 9999;
-  width: 100%;
+  width: 665px;
   background-color: #9493bd;
 }
 

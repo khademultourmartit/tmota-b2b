@@ -12,7 +12,6 @@ const OnewaySearch = () => {
   const [airlineData, setAirLineData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("searchResults", searchResults);
 
   useEffect(() => {
     axios

@@ -514,6 +514,7 @@ const SearchBox = () => {
             />
           </Box>
         </CardWrapper>
+
         <Box mt={3}>
           <Typography
             style={{

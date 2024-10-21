@@ -1,7 +1,12 @@
-import { Box, SxProps, Theme } from '@mui/material';
-import { ReactNode } from 'react';
+import { Box, SxProps, Theme } from "@mui/material";
+import { ReactNode } from "react";
 
-const defaultStyles: SxProps<Theme> = { bgcolor: "white", mt: 3, borderRadius: "4px", p: "15px 20px" };
+const defaultStyles: SxProps<Theme> = {
+  bgcolor: "white",
+  mt: 3,
+  borderRadius: "4px",
+  p: "20px 15px",
+};
 
 const CardWrapper = ({
   children,
@@ -13,8 +18,8 @@ const CardWrapper = ({
   return (
     <Box
       sx={{
-        ...defaultStyles,   // Default styles
-        ...sx,          // Override with custom styles
+        ...defaultStyles, // Default styles
+        ...sx, // Override with custom styles
       }}
     >
       {children}
