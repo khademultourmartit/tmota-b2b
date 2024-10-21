@@ -564,6 +564,28 @@ const MulticitySearchBox = ({
                     </Box>
 
                     <Box
+                    onClick={()=>{
+                    
+                      const newSegment = {
+                        id: 1,
+                        fromSearchText: toSearchText,
+                        toSearchText: {
+                          airportCode: "DXB",
+                          airportName: "Dubai Airport",
+                          cityName: "Dubai Test",
+                          countryName: "Dubai",
+                        },
+                        openFrom: openFrom,
+                        openTo: openTo,
+                        journeyDate: journeyDate,
+                        openJourneyDate: openJourneyDate,
+                      }
+                      const updatedSearchData = {
+                        ...searchData,
+                        segments: [...searchData.segments, newSegment],
+                      };
+                      setSearchData(updatedSearchData);
+                    }}
                       sx={{
                         textAlign: "center",
                       }}

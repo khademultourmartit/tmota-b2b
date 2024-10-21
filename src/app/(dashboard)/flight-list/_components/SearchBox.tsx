@@ -427,6 +427,7 @@ const SearchBox = () => {
     ],
   });
 
+  console.log(currentMenu)
   const handleSearch = () => {
     const body = {
       pointOfSale: "BD",
