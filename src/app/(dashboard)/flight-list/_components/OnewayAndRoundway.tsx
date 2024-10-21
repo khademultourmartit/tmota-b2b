@@ -67,6 +67,8 @@ const OnewayAndRoundway = ({
   setOpenReturnDate,
   setCurrentMenu,
 }: any) => {
+
+  
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -79,7 +81,9 @@ const OnewayAndRoundway = ({
     setDateRange([ranges.selection]);
     setJourneyDate(ranges.selection.startDate);
     setReturnDate(ranges.selection.endDate);
-    // setOpenReturnDate(false);
+    if (ranges.selection.endDate > ranges.selection.startDate) {
+      setOpenReturnDate(false);
+    }
   };
 
   const startDate = new Date(journeyDate);

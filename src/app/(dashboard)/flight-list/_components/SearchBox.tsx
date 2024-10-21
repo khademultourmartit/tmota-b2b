@@ -27,6 +27,7 @@ import { storeSearchResults } from "@/redux/slices/onewaySlice";
 import { useDispatch } from "react-redux";
 import secureLocalStorage from "react-secure-storage";
 import HomeSlider from "../../dashboard/_components/HomeSlider";
+import MulticitySearchBox from "./MulticitySearchBox";
 type MenuItem = {
   name: string;
   icon: string;
@@ -344,22 +345,99 @@ const SearchBox = () => {
     setToSearchText(fromSearchText);
   };
 
+  const oneWaySearch = [
+    {
+      departure: {
+        locationCode: fromSearchText?.airportCode,
+        date: moment(journeyDate).format("YYYY-MM-DD"),
+      },
+      arrival: {
+        locationCode: toSearchText?.airportCode,
+      },
+    },
+  ];
+
+  const returnSearch = [
+    {
+      departure: {
+        locationCode: fromSearchText?.airportCode,
+        date: moment(journeyDate).format("YYYY-MM-DD"),
+      },
+      arrival: {
+        locationCode: toSearchText?.airportCode,
+      },
+    },
+    {
+      departure: {
+        locationCode: fromSearchText?.airportCode,
+        date: moment(returnDate).format("YYYY-MM-DD"),
+      },
+      arrival: {
+        locationCode: toSearchText?.airportCode,
+      },
+    },
+  ];
+
+  // interface fromSearchText {
+  //   airportCode: any;
+  //   airportName: any;
+  //   cityName: any;
+  //   countryName: any;
+  // }
+
+  interface Segment {
+    id: any;
+    fromSearchText: any;
+    toSearchText: any;
+    openFrom: any;
+    openTo: any;
+    openJourneyDate: any;
+    journeyDate: any;
+  }
+
+  interface SearchData {
+    segments: Segment[];
+  }
+
+  const [searchData, setSearchData] = useState<SearchData>({
+    segments: [
+      {
+        id: 0,
+        fromSearchText: fromSearchText,
+        toSearchText: toSearchText,
+        openFrom: openFrom,
+        openTo: openTo,
+        journeyDate: journeyDate,
+        openJourneyDate: openJourneyDate,
+      },
+      {
+        id: 1,
+        fromSearchText: toSearchText,
+        toSearchText: {
+          airportCode: "DXB",
+          airportName: "Dubai Airport",
+          cityName: "Dubai Test",
+          countryName: "Dubai",
+        },
+        openFrom: openFrom,
+        openTo: openTo,
+        journeyDate: journeyDate,
+        openJourneyDate: openJourneyDate,
+      },
+    ],
+  });
+
   const handleSearch = () => {
     const body = {
       pointOfSale: "BD",
       searchCriteria: {
         tripType: currentMenu,
-        originDestination: [
-          {
-            departure: {
-              locationCode: fromSearchText?.airportCode,
-              date: moment(journeyDate).format("YYYY-MM-DD"),
-            },
-            arrival: {
-              locationCode: toSearchText?.airportCode,
-            },
-          },
-        ],
+        originDestination:
+          currentMenu === "Oneway"
+            ? oneWaySearch
+            : currentMenu === "Round Trip"
+            ? returnSearch
+            : "",
       },
       passengerInfo: [
         ...[...new Array(adultCount)].map((_, i) => ({
@@ -459,59 +537,119 @@ const SearchBox = () => {
             }}
           />
           <Box mt={2}>
-            <OnewayAndRoundway
-              {...{
-                openFrom,
-                openTo,
-                setOpenFrom,
-                setOpenTo,
-                setTravelerBoxOpen,
-                setClassBoxOpen,
-                setSearchKeyword,
-                setOpenJourneyDate,
-                fromSearchText,
-                toSearchText,
-                handleReverseDestination,
-                journeyDate,
-                setJourneyDate,
-                openJourneyDate,
-                openReturnDate,
-                today,
-                handleSelect,
-                handleSelectReturn,
-                className,
-                totalPassenger,
-                travelerBoxOpen,
-                classBoxOpen,
-                handleClassName,
-                handleSearch,
-                adultDecrement,
-                adultCount,
-                adultInclement,
-                childDecrement,
-                childCount,
-                childIncrement,
-                kidDecrement,
-                kidCount,
-                kidInclement,
-                infantDecrement,
-                infantCount,
-                infantIncrement,
-                infantWithSeatIncrement,
-                infantWithSeatCount,
-                infantWithSeatDecrement,
-                handleClose,
-                airportData,
-                setAirportData,
-                fromSuggestedText,
-                toSuggestedText,
-                currentMenu,
-                returnDate,
-                setReturnDate,
-                setOpenReturnDate,
-                setCurrentMenu,
-              }}
-            />
+            {currentMenu === "Oneway" || currentMenu === "Round Trip" ? (
+              <OnewayAndRoundway
+                {...{
+                  openFrom,
+                  openTo,
+                  setOpenFrom,
+                  setOpenTo,
+                  setTravelerBoxOpen,
+                  setClassBoxOpen,
+                  setSearchKeyword,
+                  setOpenJourneyDate,
+                  fromSearchText,
+                  toSearchText,
+                  handleReverseDestination,
+                  journeyDate,
+                  setJourneyDate,
+                  openJourneyDate,
+                  openReturnDate,
+                  today,
+                  handleSelect,
+                  handleSelectReturn,
+                  className,
+                  totalPassenger,
+                  travelerBoxOpen,
+                  classBoxOpen,
+                  handleClassName,
+                  handleSearch,
+                  adultDecrement,
+                  adultCount,
+                  adultInclement,
+                  childDecrement,
+                  childCount,
+                  childIncrement,
+                  kidDecrement,
+                  kidCount,
+                  kidInclement,
+                  infantDecrement,
+                  infantCount,
+                  infantIncrement,
+                  infantWithSeatIncrement,
+                  infantWithSeatCount,
+                  infantWithSeatDecrement,
+                  handleClose,
+                  airportData,
+                  setAirportData,
+                  fromSuggestedText,
+                  toSuggestedText,
+                  currentMenu,
+                  returnDate,
+                  setReturnDate,
+                  setOpenReturnDate,
+                  setCurrentMenu,
+                }}
+              />
+            ) : (
+              <>
+                <MulticitySearchBox
+                  {...{
+                    openFrom,
+                    openTo,
+                    setOpenFrom,
+                    setOpenTo,
+                    setTravelerBoxOpen,
+                    setClassBoxOpen,
+                    setSearchKeyword,
+                    setOpenJourneyDate,
+                    fromSearchText,
+                    toSearchText,
+                    handleReverseDestination,
+                    journeyDate,
+                    setJourneyDate,
+                    openJourneyDate,
+                    openReturnDate,
+                    today,
+                    handleSelect,
+                    handleSelectReturn,
+                    className,
+                    totalPassenger,
+                    travelerBoxOpen,
+                    classBoxOpen,
+                    handleClassName,
+                    handleSearch,
+                    adultDecrement,
+                    adultCount,
+                    adultInclement,
+                    childDecrement,
+                    childCount,
+                    childIncrement,
+                    kidDecrement,
+                    kidCount,
+                    kidInclement,
+                    infantDecrement,
+                    infantCount,
+                    infantIncrement,
+                    infantWithSeatIncrement,
+                    infantWithSeatCount,
+                    infantWithSeatDecrement,
+                    handleClose,
+                    airportData,
+                    setAirportData,
+                    fromSuggestedText,
+                    toSuggestedText,
+                    currentMenu,
+                    returnDate,
+                    setReturnDate,
+                    setOpenReturnDate,
+                    setCurrentMenu,
+                    searchData,
+                    setSearchData,
+                  }}
+                />
+              </>
+            )}
           </Box>
         </CardWrapper>
 
