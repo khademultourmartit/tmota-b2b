@@ -22,7 +22,7 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          `${projectConfig.apiBaseUrl}/auth/login`,
+          `${projectConfig.apiBaseUrl}/agent/auth/login`,
           values
         );
 

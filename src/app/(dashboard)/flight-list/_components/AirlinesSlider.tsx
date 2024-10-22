@@ -13,7 +13,7 @@ const AirlinesSlider = ({ airlineData }: any) => {
   const CustomNextArrow = (props: any) => {
     const { onClick } = props;
     return (
-      <div
+      <Box
         onClick={onClick}
         style={{
           backgroundColor: "var(--primary-color)",
@@ -29,7 +29,7 @@ const AirlinesSlider = ({ airlineData }: any) => {
           cursor: "pointer",
         }}
       >
-        <p
+        <Typography
           style={{
             fontSize: "40px",
             margin: "0",
@@ -37,8 +37,8 @@ const AirlinesSlider = ({ airlineData }: any) => {
           }}
         >
           &#8250;
-        </p>
-      </div>
+        </Typography>
+      </Box>
     );
   };
 

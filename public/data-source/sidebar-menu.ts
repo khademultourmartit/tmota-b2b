@@ -63,6 +63,7 @@ export const sidebarMenu = [
     icon: MarketSales,
     path: "#",
   },
+
   {
     name: "Promotion",
     tag: "promotion",

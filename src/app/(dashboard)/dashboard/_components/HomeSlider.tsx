@@ -39,7 +39,7 @@ function HomeSlider() {
   const CustomNextArrow = (props: any) => {
     const { onClick } = props;
     return (
-      <div
+      <Box
         onClick={onClick}
         style={{
           backgroundColor: "var(--primary-color)",
@@ -55,7 +55,7 @@ function HomeSlider() {
           cursor: "pointer",
         }}
       >
-        <p
+        <Typography
           style={{
             fontSize: "40px",
             margin: "0",
@@ -63,8 +63,8 @@ function HomeSlider() {
           }}
         >
           &#8250;
-        </p>
-      </div>
+        </Typography>
+      </Box>
     );
   };
 
@@ -72,7 +72,7 @@ function HomeSlider() {
     const { onClick } = props;
 
     return (
-      <div
+      <Box
         onClick={onClick}
         style={{
           width: "25px",
@@ -87,7 +87,7 @@ function HomeSlider() {
           cursor: "pointer",
         }}
       >
-        <p
+        <Typography
           style={{
             fontSize: "40px",
             margin: "0",
@@ -95,8 +95,8 @@ function HomeSlider() {
           }}
         >
           &#8249;
-        </p>
-      </div>
+        </Typography>
+      </Box>
     );
   };
 
