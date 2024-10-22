@@ -1,15 +1,18 @@
-import ReduxStoreProvider from "@/providers/ReduxStoreProvider";
+import ReactQueryPvorider from "@/utils/react-query";
+import AuthCheck from "@/components/auth-check";
+
 import "./globals.css";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
       <body style={{ backgroundColor: "#F2F0F9" }}>
-        <ReduxStoreProvider>{children}</ReduxStoreProvider>
+        <AuthCheck />
+        <ReactQueryPvorider>{children}</ReactQueryPvorider>
       </body>
     </html>
   );

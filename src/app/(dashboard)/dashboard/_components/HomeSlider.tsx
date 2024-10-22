@@ -1,4 +1,6 @@
-import { Box, Skeleton, Typography } from "@mui/material";
+"use client";
+
+import { Box, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -7,7 +9,7 @@ import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 
 function HomeSlider() {
-  const token = secureLocalStorage.getItem("token");
+  const token = secureLocalStorage.getItem("accessToken");
 
   const [slider, setSlider] = useState([]);
   const [slideLoad, setSlideLoad] = useState([1, 2, 3, 4]);
