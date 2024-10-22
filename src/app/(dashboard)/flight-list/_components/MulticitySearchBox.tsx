@@ -281,7 +281,7 @@ const MulticitySearchBox = ({
                     <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
                       <Box
                         sx={{
-                          height: "36px",
+                          height: "35px",
                           bgcolor: "#F2F0F9",
                           width: "55px",
                           display: "flex",
