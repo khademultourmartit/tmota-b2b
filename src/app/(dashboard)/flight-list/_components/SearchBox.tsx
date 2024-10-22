@@ -132,6 +132,8 @@ const SearchBox = () => {
     countryName: "Bangladesh",
   });
 
+  console.log("fromSearchText", fromSearchText);
+
   const [toSearchText, setToSearchText] = useState({
     airportCode: "CXB",
     airportName: "Coxs Bazar Airport",
@@ -382,8 +384,14 @@ const SearchBox = () => {
 
   interface Segment {
     id: any;
-    fromSearchText: any;
-    toSearchText: any;
+    fromAirportCode: any;
+    fromCityName: any;
+    fromCountryName: any;
+    fromAirportName: any;
+    toAirportCode: any;
+    toCityName: any;
+    toCountryName: any;
+    toAirportName: any;
     openFrom: any;
     openTo: any;
     openJourneyDate: any;
@@ -398,8 +406,14 @@ const SearchBox = () => {
     segments: [
       {
         id: 0,
-        fromSearchText: fromSearchText,
-        toSearchText: toSearchText,
+        fromAirportCode: fromSearchText?.airportCode,
+        fromCityName: fromSearchText?.cityName,
+        fromCountryName: fromSearchText?.countryName,
+        fromAirportName: fromSearchText?.airportName,
+        toAirportCode: toSearchText?.airportCode,
+        toCityName: toSearchText?.cityName,
+        toCountryName: toSearchText?.countryName,
+        toAirportName: toSearchText?.airportName,
         openFrom: openFrom,
         openTo: openTo,
         journeyDate: journeyDate,
@@ -407,13 +421,14 @@ const SearchBox = () => {
       },
       {
         id: 1,
-        fromSearchText: toSearchText,
-        toSearchText: {
-          airportCode: "DXB",
-          airportName: "Dubai Airport",
-          cityName: "Dubai Test",
-          countryName: "Dubai",
-        },
+        fromAirportCode: toSearchText?.airportCode,
+        fromCityName: toSearchText?.cityName,
+        fromCountryName: toSearchText?.countryName,
+        fromAirportName: toSearchText?.airportName,
+        toAirportCode: "DXB",
+        toCityName: "Dubai",
+        toCountryName: "United Arab Emirates",
+        toAirportName: "Dubai Intl Arpt",
         openFrom: openFrom,
         openTo: openTo,
         journeyDate: journeyDate,
@@ -421,6 +436,50 @@ const SearchBox = () => {
       },
     ],
   });
+
+  // useEffect(() => {
+  //   setSearchData({
+  //     segments: [
+  //       {
+  //         id: 0,
+  //         fromAirportCode: fromSearchText?.airportCode,
+  //         fromCityName: fromSearchText?.cityName,
+  //         fromCountryName: fromSearchText?.countryName,
+  //         fromAirportName: fromSearchText?.airportName,
+  //         toAirportCode: toSearchText?.airportCode,
+  //         toCityName: toSearchText?.cityName,
+  //         toCountryName: toSearchText?.countryName,
+  //         toAirportName: toSearchText?.airportName,
+  //         openFrom: openFrom,
+  //         openTo: openTo,
+  //         journeyDate: journeyDate,
+  //         openJourneyDate: openJourneyDate,
+  //       },
+  //       {
+  //         id: 1,
+  //         fromAirportCode: toSearchText?.airportCode,
+  //         fromCityName: toSearchText?.cityName,
+  //         fromCountryName: toSearchText?.countryName,
+  //         fromAirportName: toSearchText?.airportName,
+  //         toAirportCode: "DXB",
+  //         toCityName: "Dubai",
+  //         toCountryName: "United Arab Emirates",
+  //         toAirportName: "Dubai Intl Arpt",
+  //         openFrom: openFrom,
+  //         openTo: openTo,
+  //         journeyDate: journeyDate,
+  //         openJourneyDate: openJourneyDate,
+  //       },
+  //     ],
+  //   });
+  // }, [
+  //   fromSearchText,
+  //   toSearchText,
+  //   openFrom,
+  //   openTo,
+  //   journeyDate,
+  //   openJourneyDate,
+  // ]);
 
   const handleSearch = () => {
     const body = {
