@@ -147,6 +147,35 @@ const MulticitySearchBox = ({
     );
   };
 
+  const addCity = () => {
+    const tempSearchData = [...searchData.segments];
+    tempSearchData.push({
+      id: tempSearchData.length,
+      fromAirportCode:
+        tempSearchData[tempSearchData.length - 1].fromAirportCode,
+      fromCityName: tempSearchData[tempSearchData.length - 1].fromCityName,
+      fromCountryName:
+        tempSearchData[tempSearchData.length - 1].fromCountryName,
+      fromAirportName:
+        tempSearchData[tempSearchData.length - 1].tempSearchData[
+          tempSearchData.length - 1
+        ].fromCountryName,
+
+      // fromSearchText: tempSearchData[tempSearchData.length - 1].ArrTo,
+      // toSearchText: tempSearchData[tempSearchData.length - 1].arrToText,
+
+      openFrom: openFrom,
+      openTo: openTo,
+      journeyDate: journeyDate,
+      openJourneyDate: openJourneyDate,
+    });
+    setSearchData({
+      ...searchData,
+      segments: tempSearchData,
+      CityCount: tempSearchData.length,
+    });
+  };
+
   console.log("searchData", searchData);
 
   return (
@@ -244,8 +273,7 @@ const MulticitySearchBox = ({
                         }}
                       />
                     </Box>
-                  ) : segment?.fromSearchText?.airportCode ===
-                    segment?.toSearchText?.airportCode ? (
+                  ) : segment?.fromAirportCode === segment?.toAirportCode ? (
                     <Box pt={5.5}>
                       <SamePlaceError />
                     </Box>
@@ -264,7 +292,7 @@ const MulticitySearchBox = ({
                         <Typography
                           sx={{ color: "#6E0A82", fontWeight: "500" }}
                         >
-                          {segment?.fromSearchText?.airportCode}
+                          {segment?.fromAirportCode}
                         </Typography>
                       </Box>
                       <Box>
@@ -274,11 +302,10 @@ const MulticitySearchBox = ({
                             fontSize: "14px",
                           }}
                         >
-                          {segment?.fromSearchText?.cityName},
-                          {segment?.fromSearchText?.countryName}
+                          {segment?.fromCityName},{segment?.fromCountryName}
                         </Typography>
                         <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                          {segment?.fromSearchText?.airportName}
+                          {segment?.fromAirportName}
                         </Typography>
                       </Box>
                     </Box>
@@ -382,8 +409,7 @@ const MulticitySearchBox = ({
                         }}
                       />
                     </Box>
-                  ) : segment?.fromSearchText?.airportCode ===
-                    segment?.toSearchText?.airportCode ? (
+                  ) : segment?.fromAirportCode === segment?.toAirportCode ? (
                     <SamePlaceError />
                   ) : (
                     <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
@@ -400,7 +426,7 @@ const MulticitySearchBox = ({
                         <Typography
                           sx={{ color: "#6E0A82", fontWeight: "500" }}
                         >
-                          {segment?.toSearchText?.airportCode}
+                          {segment?.toAirportCode}
                         </Typography>
                       </Box>
                       <Box>
@@ -411,11 +437,10 @@ const MulticitySearchBox = ({
                             textWrap: "nowrap",
                           }}
                         >
-                          {segment?.toSearchText?.cityName},
-                          {segment?.toSearchText?.countryName}
+                          {segment?.toCityName},{segment?.toCountryName}
                         </Typography>
                         <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                          {toSearchText?.airportName}
+                          {toSearchText?.toAirportName}
                         </Typography>
                       </Box>
                     </Box>
@@ -441,6 +466,7 @@ const MulticitySearchBox = ({
                 </Box>
               </Grid>
             </Grid>
+
             <Grid
               item
               container
@@ -564,28 +590,30 @@ const MulticitySearchBox = ({
                     </Box>
 
                     <Box
-                    onClick={()=>{
-                    
-                      const newSegment = {
-                        id: 1,
-                        fromSearchText: toSearchText,
-                        toSearchText: {
-                          airportCode: "DXB",
-                          airportName: "Dubai Airport",
-                          cityName: "Dubai Test",
-                          countryName: "Dubai",
-                        },
-                        openFrom: openFrom,
-                        openTo: openTo,
-                        journeyDate: journeyDate,
-                        openJourneyDate: openJourneyDate,
-                      }
-                      const updatedSearchData = {
-                        ...searchData,
-                        segments: [...searchData.segments, newSegment],
-                      };
-                      setSearchData(updatedSearchData);
-                    }}
+                      onClick={addCity}
+                      //   onClick={() => {
+                      //     const newSegment = {
+                      //       id: 1,
+                      //       fromSearchText: toSearchText,
+                      //       toSearchText: {
+                      //         airportCode: "DXB",
+                      //         airportName: "Dubai Airport",
+                      //         cityName: "Dubai Test",
+                      //         countryName: "Dubai",
+                      //       },
+                      //       openFrom: openFrom,
+                      //       openTo: openTo,
+                      //       journeyDate: journeyDate,
+                      //       openJourneyDate: openJourneyDate,
+                      //     };
+                      //     const updatedSearchData = {
+                      //       ...searchData,
+                      //       segments: [...searchData.segments, newSegment],
+                      //     };
+                      //     setSearchData(updatedSearchData);
+                      //   }
+                      // }
+
                       sx={{
                         textAlign: "center",
                       }}
