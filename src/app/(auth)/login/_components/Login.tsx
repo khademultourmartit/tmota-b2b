@@ -1,15 +1,13 @@
 "use client";
 
 import CardWrapper from "@/app/(dashboard)/flight-list/_components/CardWrapper";
-import { projectConfig } from "@/config";
-import { Button } from "@mui/material";
-import axios from "axios";
-import { useFormik } from "formik";
+import { login } from "@/features/auth/apis/service";
 import { useRouter } from "next/navigation";
+import { Button } from "@mui/material";
+import { useFormik } from "formik";
 import React from "react";
-import secureLocalStorage from "react-secure-storage";
 
-const LoginPage = () => {
+const LoginForm = () => {
   const router = useRouter();
 
   const initialValues = {
@@ -21,20 +19,10 @@ const LoginPage = () => {
     initialValues,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(
-          `${projectConfig.apiBaseUrl}/auth/login`,
-          values
-        );
-
-        if (response?.status === 201) {
-          secureLocalStorage.setItem(
-            "token",
-            response?.data?.payload?.access_token
-          );
-          router.push("/dashboard");
-        }
-      } catch (error) {
-        console.error("Login failed:", error);
+        const result = await login(values);
+        if (result) router.push("/dashboard");
+      } catch (err) {
+        console.log(err);
       }
     },
   });
@@ -67,4 +55,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginForm;

@@ -2,44 +2,61 @@
 
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import secureLocalStorage from "react-secure-storage";
 import AirlinesSlider from "./AirlinesSlider";
-import { projectConfig } from "@/config";
+import { flightSearch } from "@/features/flight-search/apis/service";
 
 const OnewaySearch = () => {
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
   const [airlineData, setAirLineData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-
   useEffect(() => {
-    axios
-      .post(
-        `${projectConfig.apiBaseUrl}/api/flight/flight-search`,
-        secureLocalStorage.getItem("onewaybody"),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        const data: any = response.data?.payload?.pricedItineraries;
-        secureLocalStorage.setItem("flightSearchResults", JSON.stringify(data));
-        const parsedResults = data;
-        const airLinesData = parsedResults.map((data: any) => ({
-          validatingCarrier: data?.flightOffer?.validatingCarrier,
-          totalFare: data?.flightOffer?.pricingInfo?.price?.totalFare,
-        }));
-        setAirLineData(airLinesData);
-        setSearchResults(parsedResults);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Search Error:", error);
-      });
+    (async () => {
+      const response = await flightSearch(
+        secureLocalStorage.getItem("onewaybody")
+      );
+
+      const data: any = response.data?.payload?.pricedItineraries;
+      secureLocalStorage.setItem("flightSearchResults", JSON.stringify(data));
+      const parsedResults = data;
+      const airLinesData = parsedResults.map((data: any) => ({
+        validatingCarrier: data?.flightOffer?.validatingCarrier,
+        totalFare: data?.flightOffer?.pricingInfo?.price?.totalFare,
+      }));
+      setAirLineData(airLinesData);
+      setSearchResults(parsedResults);
+      setIsLoading(false);
+    })();
   }, [secureLocalStorage.getItem("onewaybody")]);
+
+  // useEffect(() => {
+  // axios
+  //   .post(
+  //     `${projectConfig.apiBaseUrl}/api/flight/flight-search`,
+  //     secureLocalStorage.getItem("onewaybody"),
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   )
+  //   .then((response) => {
+  //     const data: any = response.data?.payload?.pricedItineraries;
+  //     secureLocalStorage.setItem("flightSearchResults", JSON.stringify(data));
+  //     const parsedResults = data;
+  //     const airLinesData = parsedResults.map((data: any) => ({
+  //       validatingCarrier: data?.flightOffer?.validatingCarrier,
+  //       totalFare: data?.flightOffer?.pricingInfo?.price?.totalFare,
+  //     }));
+  //     setAirLineData(airLinesData);
+  //     setSearchResults(parsedResults);
+  //     setIsLoading(false);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Search Error:", error);
+  //   });
+  // }, [secureLocalStorage.getItem("onewaybody")]);
   return (
     <Box>
       <Typography>One Way search Result</Typography>

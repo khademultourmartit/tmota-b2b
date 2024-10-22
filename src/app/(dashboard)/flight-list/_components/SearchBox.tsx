@@ -1,33 +1,26 @@
-import {
-  Box,
-  Button,
-  ClickAwayListener,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+"use client";
+
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Radio from "@mui/material/Radio";
 import { styled } from "@mui/material/styles";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { addDays, format } from "date-fns";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-
 import CustomClickAwayListener from "@/app/(dashboard)/flight-list/_components/CustomClickAwayListener";
 import FlightMenu from "@/app/(dashboard)/flight-list/_components/FlightMenu";
 import FlightSearchBar from "@/app/(dashboard)/flight-list/_components/FlightSearchBar";
 import CardWrapper from "@/app/(dashboard)/flight-list/_components/CardWrapper";
 import Marquee from "react-fast-marquee";
 import OnewayAndRoundway from "./OnewayAndRoundway";
-import { storeSearchResults } from "@/redux/slices/onewaySlice";
-import { useDispatch } from "react-redux";
 import secureLocalStorage from "react-secure-storage";
 import HomeSlider from "../../dashboard/_components/HomeSlider";
 import MulticitySearchBox from "./MulticitySearchBox";
+import { useGetAirportSearchQuery } from "@/features/airport-search/apis/queries";
+import { airportSearch } from "@/features/airport-search/apis/service";
+import axios from "axios";
+
 type MenuItem = {
   name: string;
   icon: string;
@@ -103,8 +96,8 @@ const BpCheckedIcon = styled(BpIcon)({
 });
 
 const SearchBox = () => {
-  const dispatch = useDispatch();
-  const token = secureLocalStorage.getItem("token");
+  const token = secureLocalStorage.getItem('accessToken')
+
   const [tabs, setTabs] = useState("Flight");
   const [currentMenu, setCurrentMenu] = useState("Oneway");
   const [travelerBoxOpen, setTravelerBoxOpen] = useState(false);
@@ -119,15 +112,16 @@ const SearchBox = () => {
   const [infantCount, setInfantCount] = useState(0);
   const [infantWithSeatCount, setInfantWithSeatCount] = useState(0);
   const [totalPassenger, setTotalPassenger] = useState(1);
-  const [airportData, setAirportData] = useState<AirportPayload[]>([]);
+  const [airportData, setAirportData] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("bangladesh");
   const [className, setClassName] = useState("Economy");
   const now = useRef(new Date());
   const router = useRouter();
   const [journeyDate, setJourneyDate] = useState(addDays(now.current, 0));
   const [returnDate, setReturnDate] = useState(addDays(now.current, 0));
-
+  const [notice, setNotice] = useState([]);
   const [open, setOpen] = useState(false);
+
   const today = new Date();
   const maxDate = new Date();
 
@@ -145,13 +139,14 @@ const SearchBox = () => {
     countryName: "Bangladesh",
   });
 
+
+  
+  // query  
   useEffect(() => {
-    const url = `http://82.112.238.135:88/airports/search?searchInput=${searchKeyword}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setAirportData(data?.payload);
-      });
+    (async () => {
+      const { data } = await airportSearch(searchKeyword);
+      setAirportData(data.payload || []);
+    })();
   }, [searchKeyword]);
 
   const handleClose = () => {
@@ -506,7 +501,6 @@ const SearchBox = () => {
     //   });
   };
 
-  const [notice, setNotice] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const url = `http://82.112.238.135:88/notices?page=1&limit=10`;

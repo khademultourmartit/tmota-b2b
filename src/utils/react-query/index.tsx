@@ -10,6 +10,7 @@ const queryClientOptions = {
   },
 };
 
+
 const ReactQueryPvorider: React.FC<PropsWithChildren> = ({ children }) => {
   const [queryClient] = useState(() => new QueryClient(queryClientOptions));
 
