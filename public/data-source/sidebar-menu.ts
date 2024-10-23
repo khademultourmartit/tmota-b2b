@@ -24,6 +24,22 @@ export const sidebarMenu = [
     path: "/dashboard",
   },
   {
+    name: "Deposit Request",
+    tag: "deposit_request",
+    isEnabled: true,
+    isAccessable: true,
+    icon: Accounts,
+    path: "/deposit-request",
+  },
+  {
+    name: "Credit Request",
+    tag: "credit_request",
+    isEnabled: true,
+    isAccessable: true,
+    icon: Accounts,
+    path: "/credit-request",
+  },
+  {
     name: "Profile",
     tag: "user-profile",
     isEnabled: true,
@@ -63,7 +79,6 @@ export const sidebarMenu = [
     icon: MarketSales,
     path: "#",
   },
-
   {
     name: "Promotion",
     tag: "promotion",

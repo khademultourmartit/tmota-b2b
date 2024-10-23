@@ -1,6 +1,4 @@
-@import './variables.scss';
-@import './credit-request/credit-request.scss';
-@import './deposit-request/deposit-request.scss';
+@import './variables.scss'; 
 
 :root {
   --background: $background-light;
@@ -168,4 +166,156 @@ a {
 
 .rdrDefinedRangesWrapper {
   display: none;
+}
+
+
+// global components scss
+.placeholderColor input::placeholder {
+  color: $color-placeholder;
+  opacity: 1;
+  font-size: 14px;
+  font-family: $font-outfit;
+  font-weight: 400;
+}
+
+#labelName {
+  color: $color-label;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+#labelBorderBottom {
+  color: $color-input;
+  font-size: 15px;
+  border-bottom: 2px solid $border-bottom-color;
+}
+
+.cuestomeInput input,
+.cuestomeInput select,
+.coustomImputBottomColor input,
+.coustomImputBottomColor select {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid $border-bottom-color;
+  font-family: $font-outfit;
+  font-size: 13px;
+  width: 100%;
+}
+
+.coustomImputBottomColor input,
+.coustomImputBottomColor select {
+  padding-bottom: 3px;
+}
+
+.primaryButton {
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  background-color: var(--theme-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  box-sizing: border-box;
+  font-size: 17px;
+  color: #fff;
+  font-family: $font-outfit;
+  cursor: pointer;
+}
+
+.my-confirm-button {
+  background-color: $theme-active !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  font-family: $font-outfit;
+  font-weight: 400;
+  cursor: pointer !important;
+
+  &:hover {
+    background-color: $theme-active !important;
+  }
+}
+
+.my-icon {
+  color: #cccc !important;
+  font-size: 12px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.my-title {
+  color: $color-label !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  font-family: $font-outfit;
+}
+
+.my-text {
+  color: $color-label !important;
+  font-size: 16px !important;
+  font-family: $font-outfit;
+  font-weight: 300 !important;
+}
+
+.my-popup,
+.my-popup-reject,
+.my-popup-approve {
+  background-color: $popup-bg !important;
+  border-radius: 10px !important;
+  padding: 20px !important;
+  width: 80% !important;
+  max-width: 700px !important;
+  height: auto !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+
+.my-popup {
+  max-width: 450px !important;
+  max-height: 260px !important;
+}
+
+.my-popup-reject {
+  max-height: 400px !important;
+}
+
+.my-popup-approve {
+  max-height: 260px !important;
+}
+
+.active-navlink {
+  background: $nav-active-bg;
+  color: $nav-active-text;
+  border-radius: 10px;
+}
+
+.custom-phone-input {
+  &:focus {
+    border-color: $focus-border !important;
+    background-color: $focus-bg !important;
+    outline: none;
+  }
+
+  &:hover {
+    border-color: $focus-border !important;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: $color-label !important;
+  background-color: transparent !important;
+}
+
+.css-1kl5tvg-MuiGrid-root > .MuiGrid-item {
+  padding-top: 5px !important;
+}
+
+.css-13xfq8m-MuiTabPanel-root {
+  padding: 0 !important;
 }
