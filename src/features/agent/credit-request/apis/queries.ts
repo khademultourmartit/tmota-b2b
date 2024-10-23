@@ -1,12 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import apiClient from "@/utils/axios";
 
-const apiUrl = "user-credit-request";
+const apiUrl = "agent/user-credit-request";
 
 export const useGetCreditRequestsQuery = (params: any) => {
-  return useQuery<any[], Error>({
+  return useQuery<any, Error>({
     queryKey: ["credit-requests", params],
-    queryFn: async () => (await apiClient.get<any[]>(apiUrl, { params })).data,
+    queryFn: async () => (await apiClient.get<any>(apiUrl, { params })).data,
   });
 };
 

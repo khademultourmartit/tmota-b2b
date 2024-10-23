@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+// import CreditRequestList from "./_components/CreditRequestList";
 
 const CreditRequest = () => {
   return (
-    <div>CreditRequest</div>
-  )
-}
+    <div>
+      {/* <CreditRequestList /> */}
+    </div>
+  );
+};
 
-export default CreditRequest
+export default CreditRequest;

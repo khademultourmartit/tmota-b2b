@@ -18,7 +18,7 @@
   border-bottom: 2px solid #cbc7df;
 }
 
-.coustomImputBottomColor input {
+.customInputBottomColor input {
   color: #6e6996;
   font-size: 15px;
   width: 100%;
@@ -28,7 +28,7 @@
   border-bottom: 2px solid #cbc7df;
 }
 
-.coustomImputBottomColor select {
+.customInputBottomColor select {
   color: #6e6996;
   font-size: 15px;
   width: 100%;
@@ -169,7 +169,7 @@ input:-webkit-autofill:active {
   background-color: transparent !important; /* Ensures the background color is transparent */
 }
 
-.cuestomeInput input {
+.customInput input {
   border: none;
   outline: none;
   border-bottom: 2px solid #cbc7df;
@@ -178,7 +178,7 @@ input:-webkit-autofill:active {
   width: 100%;
 }
 
-.cuestomeInput select {
+.customInput select {
   border: none;
   outline: none;
   border-bottom: 2px solid #cbc7df;

@@ -190,10 +190,10 @@ a {
   border-bottom: 2px solid $border-bottom-color;
 }
 
-.cuestomeInput input,
-.cuestomeInput select,
-.coustomImputBottomColor input,
-.coustomImputBottomColor select {
+.customInput input,
+.customInput select,
+.customInputBottomColor input,
+.customInputBottomColor select {
   border: none;
   outline: none;
   border-bottom: 2px solid $border-bottom-color;
@@ -202,8 +202,8 @@ a {
   width: 100%;
 }
 
-.coustomImputBottomColor input,
-.coustomImputBottomColor select {
+.customInputBottomColor input,
+.customInputBottomColor select {
   padding-bottom: 3px;
 }
 

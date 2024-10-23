@@ -1,6 +1,6 @@
 import apiClient from "@/utils/axios";
 
-const apiUrl = "user-deposit-request";
+const apiUrl = "agent/user-deposit-request";
 
 export const getDepositRequests = async (params: any) => {
   return apiClient.get(apiUrl, { params });

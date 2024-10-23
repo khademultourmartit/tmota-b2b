@@ -1,26 +1,30 @@
-import ReactQueryPvorider from "@/utils/react-query";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import ReactQueryProvider from "@/utils/react-query";
 import AuthCheck from "@/components/auth-check";
-import { Outfit } from "next/font/google";
 
 import "../scss/globals.scss";
 import "../styles/globals.css";
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-export default async function RootLayout({
+export default function DashboardLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return <div>Loading...</div>;
+
   return (
     <html lang="en">
-      <body className={outfit.className}>
+      <body style={{ backgroundColor: "#F2F0F9" }}>
         <AuthCheck />
-        <ReactQueryPvorider>{children}</ReactQueryPvorider>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );

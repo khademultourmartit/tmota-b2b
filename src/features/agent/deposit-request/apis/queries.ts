@@ -1,12 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import apiClient from "@/utils/axios";
 
-const apiUrl = "user-deposit-request";
+const apiUrl = "agent/user-deposit-request";
 
 export const useGetDepositRequestsQuery = (params: any) => {
-  return useQuery<any[], Error>({
+  return useQuery<any, Error>({
     queryKey: ["deposit-requests", params],
-    queryFn: async () => (await apiClient.get<any[]>(apiUrl, { params })).data,
+    queryFn: async () => (await apiClient.get<any>(apiUrl, { params })).data,
   });
 };
 

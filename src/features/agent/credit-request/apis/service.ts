@@ -1,6 +1,6 @@
 import apiClient from "@/utils/axios";
 
-const apiUrl = "user-credit-request";
+const apiUrl = "agent/user-credit-request";
 
 export const getCreditRequests = async (params: any) => {
   return apiClient.get(apiUrl, { params });
