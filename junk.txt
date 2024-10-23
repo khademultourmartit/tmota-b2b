@@ -130,9 +130,6 @@ const MulticitySearchBox = ({
     );
   }
 
-
-
-
   const fromGetSuggetion = () => {
     return (
       <>
