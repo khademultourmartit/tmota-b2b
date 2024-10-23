@@ -1,7 +1,15 @@
 import ReactQueryPvorider from "@/utils/react-query";
 import AuthCheck from "@/components/auth-check";
+import { Outfit } from "next/font/google";
 
-import "./globals.css";
+import "../scss/globals.scss";
+import "../styles/globals.css";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
 
 export default async function RootLayout({
   children,
@@ -10,7 +18,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ backgroundColor: "#F2F0F9" }}>
+      <body className={outfit.className}>
         <AuthCheck />
         <ReactQueryPvorider>{children}</ReactQueryPvorider>
       </body>
