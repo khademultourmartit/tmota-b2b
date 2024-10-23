@@ -804,3 +804,85 @@ const MulticitySearchBox = ({
 };
 
 export default MulticitySearchBox;
+
+
+
+
+
+
+
+
+---------------------------     handle search function -----------------------
+
+
+  const handleSearch = () => {
+    const body = {
+      pointOfSale: "BD",
+      searchCriteria: {
+        tripType: currentMenu,
+        originDestination:
+          currentMenu === "Oneway"
+            ? oneWaySearch
+            : currentMenu === "Round Trip"
+            ? returnSearch
+            : "",
+      },
+      passengerInfo: [
+        ...[...new Array(adultCount)].map((_, i) => ({
+          passengerType: "ADT",
+          passengerID: "PAS" + (i + 1),
+        })),
+        ...[...new Array(childCount)].map((_, i) => ({
+          passengerType: "CHD",
+          passengerID: "CHD" + (i + 1),
+        })),
+        ...[...new Array(kidCount)].map((_, i) => ({
+          passengerType: "KID",
+          passengerID: "KID" + (i + 1),
+        })),
+        ...[...new Array(infantCount)].map((_, i) => ({
+          passengerType: "INF",
+          passengerID: "INF" + (i + 1),
+        })),
+        ...[...new Array(infantCount)].map((_, i) => ({
+          passengerType: "INS",
+          passengerID: "INS" + (i + 1),
+        })),
+      ],
+      preferences: {
+        cabinClass: className,
+        maxStops: "All",
+        carrierPreference: [],
+        directFlightsOnly: false,
+        nearbyAirports: true,
+      },
+      pricing: {
+        currency: "BDT",
+        isRefundableOnly: false,
+        maxUpsells: 4,
+      },
+      responseOptions: {
+        format: "JSON",
+        version: "V4",
+        includeUpsells: true,
+        requestOptions: "TwoHundred",
+        isMultiOneWayOffer: true,
+      },
+      additionalInfo: {
+        conversationId: "A123456",
+        target: "Test",
+      },
+    };
+
+
+    const originDestination = body.searchCriteria.originDestination;
+    const originDestinationQuery = encodeURIComponent(
+      JSON.stringify(originDestination)
+    );
+
+    const queryParams = `?originDestination=${originDestinationQuery}&tripType=${body.searchCriteria.tripType}`;
+
+    console.log("body", body);
+
+    router.push(`/flight-list${queryParams}`);
+  };

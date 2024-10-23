@@ -96,7 +96,7 @@ const BpCheckedIcon = styled(BpIcon)({
 });
 
 const SearchBox = () => {
-  const token = secureLocalStorage.getItem('accessToken')
+  const token = secureLocalStorage.getItem("accessToken");
 
   const [tabs, setTabs] = useState("Flight");
   const [currentMenu, setCurrentMenu] = useState("Oneway");
@@ -139,9 +139,7 @@ const SearchBox = () => {
     countryName: "Bangladesh",
   });
 
-
-  
-  // query  
+  // query
   useEffect(() => {
     (async () => {
       const { data } = await airportSearch(searchKeyword);
@@ -211,9 +209,6 @@ const SearchBox = () => {
     ) {
       setAdultCount(adultCount + 1);
     }
-    // if (adultCount < 9 - (childCount + kidCount + infantWithSeatCount)) {
-    //   setAdultCount(adultCount + 1);
-    // }
   }
 
   // adult decrement
@@ -435,9 +430,6 @@ const SearchBox = () => {
     ],
   });
 
-
-  
-
   // useEffect(() => {
   //   setSearchData({
   //     segments: [
@@ -483,8 +475,7 @@ const SearchBox = () => {
   // ]);
 
   const handleSearch = () => {
-    const body = {
-      pointOfSale: "BD",
+    const destinationData = {
       searchCriteria: {
         tripType: currentMenu,
         originDestination:
@@ -492,73 +483,23 @@ const SearchBox = () => {
             ? oneWaySearch
             : currentMenu === "Round Trip"
             ? returnSearch
-            : "",
-      },
-      passengerInfo: [
-        ...[...new Array(adultCount)].map((_, i) => ({
-          passengerType: "ADT",
-          passengerID: "PAS" + (i + 1),
-        })),
-        ...[...new Array(childCount)].map((_, i) => ({
-          passengerType: "CHD",
-          passengerID: "CHD" + (i + 1),
-        })),
-        ...[...new Array(kidCount)].map((_, i) => ({
-          passengerType: "KID",
-          passengerID: "KID" + (i + 1),
-        })),
-        ...[...new Array(infantCount)].map((_, i) => ({
-          passengerType: "INF",
-          passengerID: "INF" + (i + 1),
-        })),
-        ...[...new Array(infantCount)].map((_, i) => ({
-          passengerType: "INS",
-          passengerID: "INS" + (i + 1),
-        })),
-      ],
-      preferences: {
-        cabinClass: className,
-        maxStops: "All",
-        carrierPreference: [],
-        directFlightsOnly: false,
-        nearbyAirports: true,
-      },
-      pricing: {
-        currency: "BDT",
-        isRefundableOnly: false,
-        maxUpsells: 4,
-      },
-      responseOptions: {
-        format: "JSON",
-        version: "V4",
-        includeUpsells: true,
-        requestOptions: "TwoHundred",
-        isMultiOneWayOffer: true,
-      },
-      additionalInfo: {
-        conversationId: "A123456",
-        target: "Test",
+            : [],
       },
     };
-    const bodyString = JSON.stringify(body);
-    secureLocalStorage.setItem("onewaybody", JSON.stringify(body));
-    router.push(`/flight-list`);
 
-    // axios
-    //   .post("http://82.112.238.135:112/api/flight/flight-search", bodyString, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     const data: any = response.data?.payload?.pricedItineraries;
-    //     localStorage.setItem("flightSearchResults", JSON.stringify(data));
-
-    //     router.push(`/dashboard/OnewaySearchResults`);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Search Error:", error);
-    //   });
+    const urlSegments = destinationData.searchCriteria?.originDestination
+      ?.map((leg: any) => {
+        const { locationCode: depCode } = leg.departure;
+        const { date } = leg.departure;
+        const { locationCode: arrCode } = leg.arrival;
+        const formattedDate = date.replace(/-/g, "");
+        return `${depCode}-${arrCode}-${formattedDate}`;
+      })
+      .join("/");
+    const conversationId = "A" + Math.floor(Math.random() * 1000000000);
+    const destination = `/${urlSegments}/`;
+    const queryParams = `?destination=${destination}&num-adults=${adultCount}&num-children=${childCount}&num-kid=${kidCount}&num-infant=${infantCount}&num-infantwithseat=${infantWithSeatCount}&cabin-class=${className}&trip-type=${currentMenu}&direct-flight=${false}&conversationId=${conversationId}`;
+    router.push(`/flight-list${queryParams}`);
   };
 
   useEffect(() => {
