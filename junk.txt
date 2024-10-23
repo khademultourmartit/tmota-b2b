@@ -63,6 +63,11 @@ const MulticitySearchBox = ({
   searchData,
   setSearchData,
 }: any) => {
+
+
+
+
+
   const BpIcon = styled("span")(({ theme }) => ({
     borderRadius: "50%",
     width: 16,
@@ -157,12 +162,7 @@ const MulticitySearchBox = ({
       fromCountryName:
         tempSearchData[tempSearchData.length - 1].fromCountryName,
       fromAirportName:
-        tempSearchData[tempSearchData.length - 1].tempSearchData[
-          tempSearchData.length - 1
-        ].fromCountryName,
-
-      // fromSearchText: tempSearchData[tempSearchData.length - 1].ArrTo,
-      // toSearchText: tempSearchData[tempSearchData.length - 1].arrToText,
+        tempSearchData[tempSearchData.length - 1].fromAirportName,
 
       openFrom: openFrom,
       openTo: openTo,
@@ -175,8 +175,6 @@ const MulticitySearchBox = ({
       CityCount: tempSearchData.length,
     });
   };
-
-  console.log("searchData", searchData);
 
   return (
     <Box>
@@ -572,9 +570,7 @@ const MulticitySearchBox = ({
                   <Box
                     sx={{ cursor: "pointer" }}
 
-                    // onClick={() => {
-                    //   setCurrentMenu("Round Trip");
-                    // }}
+          
                   >
                     <Box
                       sx={{
@@ -808,5 +804,3 @@ const MulticitySearchBox = ({
 };
 
 export default MulticitySearchBox;
-
-

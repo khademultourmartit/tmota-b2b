@@ -1,5 +1,5 @@
 import { Box, Grid, Stack, Typography, styled } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import FlightClassNamesBox from "./FlightClassNamesBox";
 import TravelerBox from "./TravelerBox";
 import { Calendar, DateRange, DateRangePicker } from "react-date-range";
@@ -15,136 +15,57 @@ import AirportListsCard from "./AirportListsCard";
 import SamePlaceError from "./SamePlaceError";
 import Link from "next/link";
 import zIndex from "@mui/material/styles/zIndex";
+import { addDays, format } from "date-fns";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+
+interface Airport {
+  id: number;
+  airportCode: string;
+  airportName: string;
+  cityName: string;
+  cityCode: string;
+  countryName: string;
+  countryCode: string;
+  activeRunways: string;
+  airportElevation: string;
+}
+
+interface AirportPayload {
+  cityCode: string;
+  airportCode: string;
+  cityName: string;
+  countryName: string;
+  airportName: string;
+  airports: Airport[];
+}
 
 const MulticitySearchBox = ({
-  openFrom,
-  openTo,
-  setOpenFrom,
-  setOpenTo,
-  setTravelerBoxOpen,
-  setClassBoxOpen,
   setSearchKeyword,
-  setOpenJourneyDate,
-  fromSearchText,
-  toSearchText,
-  handleReverseDestination,
-  journeyDate,
-  openJourneyDate,
-  today,
-  handleSelect,
-  className,
-  totalPassenger,
-  travelerBoxOpen,
-  classBoxOpen,
-  handleClassName,
-  handleSearch,
-  adultDecrement,
-  adultCount,
-  adultInclement,
-  childDecrement,
-  childCount,
-  childIncrement,
-  kidDecrement,
-  kidCount,
-  kidInclement,
-  infantDecrement,
-  infantCount,
-  infantIncrement,
-  infantWithSeatIncrement,
-  infantWithSeatCount,
-  infantWithSeatDecrement,
-  handleClose,
-  airportData,
-  fromSuggestedText,
-  toSuggestedText,
-  returnDate,
-  setOpenReturnDate,
-  setCurrentMenu,
   searchData,
   setSearchData,
+  handleReverseDestination,
+  handleSearch,
+  airportData,
+  fromSearchText,
+  setFromSearchText,
 }: any) => {
-  const BpIcon = styled("span")(({ theme }) => ({
-    borderRadius: "50%",
-    width: 16,
-    height: 16,
-    boxShadow:
-      theme.palette.mode === "dark"
-        ? "0 0 0 1px rgb(16 22 26 / 40%)"
-        : "inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)",
-    backgroundColor: theme.palette.mode === "dark" ? "#394b59" : "#f5f8fa",
-    backgroundImage:
-      theme.palette.mode === "dark"
-        ? "linear-gradient(180deg,hsla(0,0%,100%,.05),hsla(0,0%,100%,0))"
-        : "linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))",
-    ".Mui-focusVisible &": {
-      outline: "2px auto #003566",
-      outlineOffset: 2,
-    },
-    "input:hover ~ &": {
-      backgroundColor: theme.palette.mode === "dark" ? "#30404d" : "#ebf1f5",
-    },
-    "input:disabled ~ &": {
-      boxShadow: "none",
-      background:
-        theme.palette.mode === "dark"
-          ? "rgba(57,75,89,.5)"
-          : "rgba(206,217,224,.5)",
-    },
-  }));
+  const [openFrom, setOpenFrom] = useState(false);
+  const [openTo, setOpenTo] = useState(false);
+  const [openJourneyDate, setOpenJourneyDate] = useState(false);
+  const now = useRef(new Date());
+  const [journeyDate, setJourneyDate] = useState(addDays(now.current, 0));
 
-  const BpCheckedIcon = styled(BpIcon)({
-    backgroundColor: "var(--primary-color)",
-    backgroundImage:
-      "linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))",
-    "&:before": {
-      display: "block",
-      width: 16,
-      height: 16,
-      backgroundImage: "radial-gradient(#fff,#fff 28%,transparent 32%)",
-      content: '""',
-    },
-    "input:hover ~ &": {
-      backgroundColor: "var(--secondary-color)",
-    },
+  const [toSearchText, setToSearchText] = useState({
+    airportCode: "CXB",
+    airportName: "Coxs Bazar Airport",
+    cityName: "Coxs Bazar",
+    countryName: "Bangladesh",
   });
 
-  function BpRadio(props: any) {
-    return (
-      <Radio
-        sx={{
-          "&:hover": {
-            bgcolor: "transparent",
-          },
-        }}
-        disableRipple
-        color="default"
-        checkedIcon={<BpCheckedIcon />}
-        icon={<BpIcon />}
-        {...props}
-      />
-    );
-  }
+  console.log("toSearchText", fromSearchText);
 
-  const fromGetSuggetion = () => {
-    return (
-      <>
-        <AirportListsCard
-          airportData={airportData}
-          getSuggestedText={fromSuggestedText}
-        />
-      </>
-    );
-  };
-
-  const toGetSuggetion = () => {
-    return (
-      <>
-        <AirportListsCard
-          airportData={airportData}
-          getSuggestedText={toSuggestedText}
-        />
-      </>
-    );
+  const getSuggestedText = (item: any) => {
+    setFromSearchText(item);
   };
 
   const addCity = () => {
@@ -157,12 +78,7 @@ const MulticitySearchBox = ({
       fromCountryName:
         tempSearchData[tempSearchData.length - 1].fromCountryName,
       fromAirportName:
-        tempSearchData[tempSearchData.length - 1].tempSearchData[
-          tempSearchData.length - 1
-        ].fromCountryName,
-
-      // fromSearchText: tempSearchData[tempSearchData.length - 1].ArrTo,
-      // toSearchText: tempSearchData[tempSearchData.length - 1].arrToText,
+        tempSearchData[tempSearchData.length - 1].fromAirportName,
 
       openFrom: openFrom,
       openTo: openTo,
@@ -175,8 +91,6 @@ const MulticitySearchBox = ({
       CityCount: tempSearchData.length,
     });
   };
-
-  console.log("searchData", searchData);
 
   return (
     <Box>
@@ -228,9 +142,6 @@ const MulticitySearchBox = ({
                   e.stopPropagation();
                   setOpenFrom((prev: boolean) => !prev);
                   setOpenTo(false);
-                  setTravelerBoxOpen(false);
-                  setClassBoxOpen(false);
-                  setOpenReturnDate(false);
                 }}
               >
                 <Box sx={{ position: "relative" }}>
@@ -281,7 +192,7 @@ const MulticitySearchBox = ({
                     <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
                       <Box
                         sx={{
-                          height: "36px",
+                          height: "35px",
                           bgcolor: "#F2F0F9",
                           width: "55px",
                           display: "flex",
@@ -325,7 +236,198 @@ const MulticitySearchBox = ({
                         border: "1px solid #6E0A82",
                       }}
                     >
-                      <Box>{fromGetSuggetion()}</Box>
+                      <Box>
+                        <Box
+                          sx={{
+                            height: "fit-content",
+                            position: "relative",
+                            width: "100%",
+                            zIndex: 100,
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              maxHeight: "230px",
+                              overflowY: "auto",
+                              background: "#fff",
+                              "&::-webkit-scrollbar": { width: "5px" },
+                            }}
+                          >
+                            {airportData?.length > 0 ? (
+                              airportData?.map((item: any) => (
+                                <Box
+                                  key={item?.id || item?.airportCode}
+                                  sx={{
+                                    padding: "10px",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  <Box
+                                    sx={{
+                                      width: "100%",
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                    }}
+                                    onClick={() => getSuggestedText(item)}
+                                  >
+                                    <Typography
+                                      sx={{
+                                        color: "#A56EB4",
+                                        fontSize: "13px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "5px",
+                                      }}
+                                    >
+                                      <LocationOnIcon
+                                        sx={{
+                                          color: "#A56EB4",
+                                          fontSize: "20px",
+                                        }}
+                                      />
+                                      {item?.cityName}
+                                    </Typography>
+
+                                    <Typography
+                                      sx={{
+                                        fontSize: "11px",
+                                        color: "#6E6996",
+                                      }}
+                                    >
+                                      All Airport
+                                    </Typography>
+                                  </Box>
+
+                                  <Box my={1}>
+                                    <hr
+                                      style={{
+                                        backgroundColor: "#F2F0F9",
+                                        height: "2px",
+                                        border: "none",
+                                      }}
+                                    />
+                                  </Box>
+
+                                  {item?.airports ? (
+                                    item?.airports?.map((data: any) => (
+                                      <Box
+                                        key={data?.id || data?.airportCode}
+                                        sx={{
+                                          display: "flex",
+                                          gap: "8px",
+                                        }}
+                                        p={0.5}
+                                        mt={1}
+                                        onClick={() => getSuggestedText(data)}
+                                      >
+                                        <Box
+                                          sx={{
+                                            height: "30px",
+                                            bgcolor: "#F2F0F9",
+                                            width: "45px",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                          }}
+                                        >
+                                          <Typography
+                                            sx={{
+                                              color: "#6E0A82",
+                                              fontWeight: "500",
+                                              fontSize: "12px",
+                                            }}
+                                          >
+                                            {data?.airportCode}
+                                          </Typography>
+                                        </Box>
+                                        <Box>
+                                          <Typography
+                                            sx={{
+                                              color: "#2D233C",
+                                              fontSize: "12px",
+                                            }}
+                                          >
+                                            {data?.cityName},{" "}
+                                            {data?.countryName}
+                                          </Typography>
+                                          <Typography
+                                            sx={{
+                                              color: "#6E6996",
+                                              fontSize: "10px",
+                                            }}
+                                          >
+                                            {data?.airportName}
+                                          </Typography>
+                                        </Box>
+                                      </Box>
+                                    ))
+                                  ) : (
+                                    <Box
+                                      sx={{
+                                        display: "flex",
+                                        gap: "8px",
+                                      }}
+                                      p={0.5}
+                                      mt={1}
+                                      onClick={() => getSuggestedText(item)}
+                                    >
+                                      <Box
+                                        sx={{
+                                          height: "30px",
+                                          bgcolor: "#F2F0F9",
+                                          width: "45px",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          justifyContent: "center",
+                                        }}
+                                      >
+                                        <Typography
+                                          sx={{
+                                            color: "#6E0A82",
+                                            fontWeight: "500",
+                                            fontSize: "12px",
+                                          }}
+                                        >
+                                          {item?.airportCode}
+                                        </Typography>
+                                      </Box>
+                                      <Box>
+                                        <Typography
+                                          sx={{
+                                            color: "#2D233C",
+                                            fontSize: "12px",
+                                          }}
+                                        >
+                                          {item?.cityName}, {item?.countryName}
+                                        </Typography>
+                                        <Typography
+                                          sx={{
+                                            color: "#6E6996",
+                                            fontSize: "10px",
+                                          }}
+                                        >
+                                          {item?.airportName}
+                                        </Typography>
+                                      </Box>
+                                    </Box>
+                                  )}
+                                </Box>
+                              ))
+                            ) : (
+                              <Box>
+                                <Typography
+                                  sx={{
+                                    color: "#DC143C",
+                                    paddingLeft: "10px",
+                                  }}
+                                >
+                                  Not found
+                                </Typography>
+                              </Box>
+                            )}
+                          </Box>
+                        </Box>
+                      </Box>
                     </Box>
                   )}
 
@@ -336,133 +438,6 @@ const MulticitySearchBox = ({
                     src={reverse}
                     alt="reverse icon"
                   />
-                </Box>
-              </Grid>
-
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={6}
-                lg={6}
-                sx={{
-                  position: "relative",
-                }}
-                onClick={() => {
-                  const tempSegment = [...searchData.segments];
-                  tempSegment[index] = {
-                    ...tempSegment[index],
-                    openFrom: false,
-                    openTo: !segment.openTo,
-                    openJourneyDate: false,
-                  };
-                  setSearchData({
-                    ...searchData,
-                    segments: tempSegment,
-                  });
-
-                  setOpenTo((prev: boolean) => !prev);
-                  setOpenFrom(false);
-                  setTravelerBoxOpen(false);
-                  setClassBoxOpen(false);
-                  setOpenReturnDate(false);
-                }}
-              >
-                <Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
-                    <Image src={ToPlane} alt="plan Icon" />
-                    <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
-                      To
-                    </Typography>
-                  </Box>
-
-                  {segment?.openTo ? (
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        color: "#003566",
-                        backgroundColor: "#fff",
-                      }}
-                    >
-                      <input
-                        autoComplete="off"
-                        autoFocus
-                        onChange={(e) => setSearchKeyword(e.target.value)}
-                        placeholder="Search an airport..."
-                        style={{
-                          color: "#9493BD",
-                          fontWeight: 500,
-                          width: "100%",
-                          height: "40px",
-                          backgroundColor: "transparent",
-                          border: "none",
-                          outline: "none",
-                          paddingTop: "10px",
-                        }}
-                      />
-                    </Box>
-                  ) : segment?.fromAirportCode === segment?.toAirportCode ? (
-                    <SamePlaceError />
-                  ) : (
-                    <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
-                      <Box
-                        sx={{
-                          height: "36px",
-                          bgcolor: "#F2F0F9",
-                          width: "55px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Typography
-                          sx={{ color: "#6E0A82", fontWeight: "500" }}
-                        >
-                          {segment?.toAirportCode}
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Typography
-                          sx={{
-                            color: "#2D233C",
-                            fontSize: "14px",
-                            textWrap: "nowrap",
-                          }}
-                        >
-                          {segment?.toCityName},{segment?.toCountryName}
-                        </Typography>
-                        <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                          {toSearchText?.toAirportName}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  )}
-
-                  {segment?.openTo && (
-                    <Box
-                      style={{
-                        position: "absolute",
-                        top: "120%",
-                        left: "0",
-                        right: "0",
-                        width: "100%",
-                        backgroundColor: "#ffffff",
-                        height: "fit-content",
-                        zIndex: 100,
-                        border: "1px solid #6E0A82",
-                      }}
-                    >
-                      <Box>{toGetSuggetion()}</Box>
-                    </Box>
-                  )}
                 </Box>
               </Grid>
             </Grid>
@@ -513,14 +488,14 @@ const MulticitySearchBox = ({
                     sx={{
                       cursor: "pointer",
                     }}
-                    onClick={() => {
-                      setOpenJourneyDate((prev: boolean) => !prev);
-                      setOpenReturnDate(false);
-                      setOpenFrom(false);
-                      setOpenTo(false);
-                      setTravelerBoxOpen(false);
-                      setClassBoxOpen(false);
-                    }}
+                    // onClick={() => {
+                    //   setOpenJourneyDate((prev: boolean) => !prev);
+                    //   setOpenReturnDate(false);
+                    //   setOpenFrom(false);
+                    //   setOpenTo(false);
+                    //   setTravelerBoxOpen(false);
+                    //   setClassBoxOpen(false);
+                    // }}
                   >
                     <Box
                       sx={{
@@ -569,13 +544,7 @@ const MulticitySearchBox = ({
                       border: "1px solid #D9D5EC",
                     }}
                   ></Box>
-                  <Box
-                    sx={{ cursor: "pointer" }}
-
-                    // onClick={() => {
-                    //   setCurrentMenu("Round Trip");
-                    // }}
-                  >
+                  <Box sx={{ cursor: "pointer" }}>
                     <Box
                       sx={{
                         display: "flex",
@@ -591,29 +560,6 @@ const MulticitySearchBox = ({
 
                     <Box
                       onClick={addCity}
-                      //   onClick={() => {
-                      //     const newSegment = {
-                      //       id: 1,
-                      //       fromSearchText: toSearchText,
-                      //       toSearchText: {
-                      //         airportCode: "DXB",
-                      //         airportName: "Dubai Airport",
-                      //         cityName: "Dubai Test",
-                      //         countryName: "Dubai",
-                      //       },
-                      //       openFrom: openFrom,
-                      //       openTo: openTo,
-                      //       journeyDate: journeyDate,
-                      //       openJourneyDate: openJourneyDate,
-                      //     };
-                      //     const updatedSearchData = {
-                      //       ...searchData,
-                      //       segments: [...searchData.segments, newSegment],
-                      //     };
-                      //     setSearchData(updatedSearchData);
-                      //   }
-                      // }
-
                       sx={{
                         textAlign: "center",
                       }}
@@ -628,7 +574,7 @@ const MulticitySearchBox = ({
                   </Box>
                 </Box>
 
-                {openJourneyDate && (
+                {/* {openJourneyDate && (
                   <Box>
                     <Calendar
                       className={"dashboard-calendar"}
@@ -638,8 +584,9 @@ const MulticitySearchBox = ({
                       minDate={today}
                       onChange={handleSelect}
                     />
+
                   </Box>
-                )}
+                )} */}
               </Grid>
             </Grid>
 
@@ -678,13 +625,6 @@ const MulticitySearchBox = ({
                           gap: "10px",
                           cursor: "pointer",
                         }}
-                        onClick={() => {
-                          setClassBoxOpen((prev: boolean) => !prev);
-                          setOpenFrom(false);
-                          setOpenTo(false);
-                          setTravelerBoxOpen(false);
-                          setOpenReturnDate(false);
-                        }}
                       >
                         <Image src={calender} alt="plan Icon" />
                         <Typography
@@ -694,7 +634,7 @@ const MulticitySearchBox = ({
                             fontWeight: 500,
                           }}
                         >
-                          {className}
+                          Economy
                         </Typography>
                       </Box>
 
@@ -712,13 +652,6 @@ const MulticitySearchBox = ({
                           gap: "10px",
                           cursor: "pointer",
                         }}
-                        onClick={() => {
-                          setTravelerBoxOpen((prev: boolean) => !prev);
-                          setOpenFrom(false);
-                          setOpenTo(false);
-                          setClassBoxOpen(false);
-                          setOpenReturnDate(false);
-                        }}
                       >
                         <Image src={calender} alt="plan Icon" />
                         <Typography
@@ -728,38 +661,9 @@ const MulticitySearchBox = ({
                             fontWeight: 500,
                           }}
                         >
-                          {totalPassenger} Traveler
+                          Traveler
                         </Typography>
                       </Box>
-
-                      {travelerBoxOpen && (
-                        <TravelerBox
-                          {...{
-                            adultDecrement,
-                            adultCount,
-                            adultInclement,
-                            childDecrement,
-                            childCount,
-                            childIncrement,
-                            kidDecrement,
-                            kidCount,
-                            kidInclement,
-                            infantDecrement,
-                            infantCount,
-                            infantIncrement,
-                            infantWithSeatIncrement,
-                            infantWithSeatCount,
-                            infantWithSeatDecrement,
-                            handleClose,
-                          }}
-                        />
-                      )}
-
-                      {classBoxOpen && (
-                        <FlightClassNamesBox
-                          {...{ className, handleClassName }}
-                        />
-                      )}
                     </Box>
                   </Box>
                 </Grid>
@@ -800,8 +704,6 @@ const MulticitySearchBox = ({
             )}
           </>
         ))}
-
-        {/*  //todo: Passenger info */}
       </Grid>
     </Box>
   );

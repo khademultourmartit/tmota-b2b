@@ -132,8 +132,6 @@ const SearchBox = () => {
     countryName: "Bangladesh",
   });
 
-  console.log("fromSearchText", fromSearchText);
-
   const [toSearchText, setToSearchText] = useState({
     airportCode: "CXB",
     airportName: "Coxs Bazar Airport",
@@ -437,6 +435,9 @@ const SearchBox = () => {
     ],
   });
 
+
+  
+
   // useEffect(() => {
   //   setSearchData({
   //     segments: [
@@ -648,57 +649,14 @@ const SearchBox = () => {
               <>
                 <MulticitySearchBox
                   {...{
-                    openFrom,
-                    openTo,
-                    setOpenFrom,
-                    setOpenTo,
-                    setTravelerBoxOpen,
-                    setClassBoxOpen,
-                    setSearchKeyword,
-                    setOpenJourneyDate,
                     fromSearchText,
-                    toSearchText,
+                    setFromSearchText,
+                    setSearchKeyword,
                     handleReverseDestination,
-                    journeyDate,
-                    setJourneyDate,
-                    openJourneyDate,
-                    openReturnDate,
-                    today,
-                    handleSelect,
-                    handleSelectReturn,
-                    className,
-                    totalPassenger,
-                    travelerBoxOpen,
-                    classBoxOpen,
-                    handleClassName,
-                    handleSearch,
-                    adultDecrement,
-                    adultCount,
-                    adultInclement,
-                    childDecrement,
-                    childCount,
-                    childIncrement,
-                    kidDecrement,
-                    kidCount,
-                    kidInclement,
-                    infantDecrement,
-                    infantCount,
-                    infantIncrement,
-                    infantWithSeatIncrement,
-                    infantWithSeatCount,
-                    infantWithSeatDecrement,
-                    handleClose,
-                    airportData,
-                    setAirportData,
-                    fromSuggestedText,
-                    toSuggestedText,
-                    currentMenu,
-                    returnDate,
-                    setReturnDate,
-                    setOpenReturnDate,
-                    setCurrentMenu,
                     searchData,
                     setSearchData,
+                    handleSearch,
+                    airportData,
                   }}
                 />
               </>

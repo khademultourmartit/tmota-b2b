@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Box, Container, Grid } from "@mui/material";
 import { sidebarMenu } from "../../../../../public/data-source/sidebar-menu";
+import LogOut from "../../../../../public/assests/menuicon/Logoutiutton.svg";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -38,10 +39,36 @@ const Sidebar = () => {
     margin: "10px 10px",
   });
 
+  const logoutContainerStyle = {
+    marginBottom: "20px",
+    position: "absolute",
+    bottom: "0px",
+    width: "100%",
+  };
+
+  const iconWrapperStyle = {
+    width: "24px",
+    height: "24px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const linkTextStyle = {
+    // display: isOpen ? "flex" : "none",
+    fontSize: "13px",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    fontFamily: "OutFit",
+  };
+
   return (
     <Box
       sx={{
         display: { xs: "none", sm: "block" },
+
+        position: "relative",
       }}
     >
       <Box
@@ -60,23 +87,6 @@ const Sidebar = () => {
           minHeight: "85vh",
         }}
       >
-        <Box
-          style={{
-            position: "absolute",
-            top: "-25px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            zIndex: "10",
-            width: "auto",
-            height: "50px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: "50%",
-            padding: "5px",
-          }}
-        ></Box>
-
         <Box>
           {menuItem.map((item, index) => (
             <React.Fragment key={index}>
@@ -105,6 +115,33 @@ const Sidebar = () => {
               </Link>
             </React.Fragment>
           ))}
+
+          <Box sx={logoutContainerStyle}>
+            <span
+              style={{
+                ...linkStyle("/logout"),
+                backgroundColor: "#B4B4CD",
+                borderRadius: "10px",
+                color: "#FFFFFF",
+                justifySelf: "flex-end",
+                padding: isOpen ? "10px 15px" : "10px",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#55507D";
+                e.currentTarget.style.color = "#FFFFFF";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#B4B4CD";
+                e.currentTarget.style.color = "#FFFFFF";
+              }}
+            >
+              <div style={iconWrapperStyle}>
+                <Image width={15} src={LogOut} alt="Log Out" />
+              </div>
+              <div style={linkTextStyle}>Log Out</div>
+            </span>
+          </Box>
         </Box>
       </Box>
     </Box>
