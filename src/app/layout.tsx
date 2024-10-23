@@ -1,18 +1,30 @@
-import ReactQueryPvorider from "@/utils/react-query";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import ReactQueryProvider from "@/utils/react-query";
 import AuthCheck from "@/components/auth-check";
 
-import "./globals.css";
+import "../scss/globals.scss";
+import "../styles/globals.css";
 
-export default async function RootLayout({
+export default function DashboardLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return <div>Loading...</div>;
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body style={{ backgroundColor: "#F2F0F9" }}>
         <AuthCheck />
-        <ReactQueryPvorider>{children}</ReactQueryPvorider>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );

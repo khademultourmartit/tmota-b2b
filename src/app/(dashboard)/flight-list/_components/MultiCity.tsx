@@ -1,8 +1,9 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 const MultiCity = () => {
   return (
-    <div>MultiCity</div>
+    <Box>MultiCity</Box>
   )
 }
 

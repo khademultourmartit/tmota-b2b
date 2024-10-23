@@ -1,0 +1,321 @@
+@import './variables.scss'; 
+
+:root {
+  --background: $background-light;
+  --foreground: $foreground-light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: $background-dark;
+    --foreground: $foreground-dark;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #F2F0F9;
+  color: var(--foreground);
+  font-family: "Outfit", sans-serif !important;
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+} 
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.dashboard-calendar, .return-calendar {
+  position: absolute;
+  border-radius: 5px;
+  z-index: 9999;
+  box-shadow: $box-shadow;
+
+  &.dashboard-calendar {
+    top: 125%;
+    left: 0;
+  }
+
+  &.return-calendar {
+    top: 125%;
+    right: -275px;
+  }
+}
+
+.return-date-count {
+  position: absolute;
+  top: 360px;
+  left: -102px;
+  z-index: 9999;
+  width: 665px;
+  background-color: #9493bd;
+}
+
+.rdrNextPrevButton {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 0.833em;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: $highlight-color !important;
+  color: #fff !important;
+}
+
+.rdrPprevButton i, .rdrNextButton i {
+  border-color: transparent rgb(253, 254, 255) transparent transparent !important;
+  
+  &:nth-child(2) {
+    border-color: transparent transparent transparent rgb(253, 254, 255) !important;
+  }
+}
+
+.rdrMonthAndYearPickers select {
+  color: $text-color !important;
+}
+
+.slick-slide-padding {
+  padding-right: 15px;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+/* Slick slider styles */
+.slick-prev:before, .slick-next:before {
+  font-size: 20px !important;
+  color: $text-color !important;
+  opacity: 0.5 !important;
+  position: absolute;
+  z-index: 999 !important;
+}
+
+.slick-prev:before {
+  content: "←";
+  left: 10px;
+}
+
+.slick-next:before {
+  content: "→";
+  left: -3px;
+}
+
+/* Switch button styling */
+.switch-image-btn {
+  position: absolute;
+  right: 10px;
+  top: 25px;
+  width: 20px;
+
+  @media (min-width: 1200px) {
+    top: 25px;
+  }
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    width: 25px;
+    right: 35px;
+    top: 20px;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    width: 22px;
+    right: 30px;
+    top: 18px;
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) {
+    width: 20px;
+    right: 25px;
+    top: 15px;
+  }
+
+  @media (max-width: 575px) {
+    width: 15px;
+    right: 15px;
+    top: 10px;
+  }
+
+  @media (max-width: 400px) {
+    width: 12px;
+    right: 10px;
+    top: 8px;
+  }
+}
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+
+// global components scss
+.placeholderColor input::placeholder {
+  color: $color-placeholder;
+  opacity: 1;
+  font-size: 14px;
+  font-family: $font-outfit;
+  font-weight: 400;
+}
+
+#labelName {
+  color: $color-label;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+#labelBorderBottom {
+  color: $color-input;
+  font-size: 15px;
+  border-bottom: 2px solid $border-bottom-color;
+}
+
+.customInput input,
+.customInput select,
+.customInputBottomColor input,
+.customInputBottomColor select {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid $border-bottom-color;
+  font-family: $font-outfit;
+  font-size: 13px;
+  width: 100%;
+}
+
+.customInputBottomColor input,
+.customInputBottomColor select {
+  padding-bottom: 3px;
+}
+
+.primaryButton {
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  background-color: var(--theme-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  box-sizing: border-box;
+  font-size: 17px;
+  color: #fff;
+  font-family: $font-outfit;
+  cursor: pointer;
+}
+
+.my-confirm-button {
+  background-color: $theme-active !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  font-family: $font-outfit;
+  font-weight: 400;
+  cursor: pointer !important;
+
+  &:hover {
+    background-color: $theme-active !important;
+  }
+}
+
+.my-icon {
+  color: #cccc !important;
+  font-size: 12px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.my-title {
+  color: $color-label !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  font-family: $font-outfit;
+}
+
+.my-text {
+  color: $color-label !important;
+  font-size: 16px !important;
+  font-family: $font-outfit;
+  font-weight: 300 !important;
+}
+
+.my-popup,
+.my-popup-reject,
+.my-popup-approve {
+  background-color: $popup-bg !important;
+  border-radius: 10px !important;
+  padding: 20px !important;
+  width: 80% !important;
+  max-width: 700px !important;
+  height: auto !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+
+.my-popup {
+  max-width: 450px !important;
+  max-height: 260px !important;
+}
+
+.my-popup-reject {
+  max-height: 400px !important;
+}
+
+.my-popup-approve {
+  max-height: 260px !important;
+}
+
+.active-navlink {
+  background: $nav-active-bg;
+  color: $nav-active-text;
+  border-radius: 10px;
+}
+
+.custom-phone-input {
+  &:focus {
+    border-color: $focus-border !important;
+    background-color: $focus-bg !important;
+    outline: none;
+  }
+
+  &:hover {
+    border-color: $focus-border !important;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: $color-label !important;
+  background-color: transparent !important;
+}
+
+.css-1kl5tvg-MuiGrid-root > .MuiGrid-item {
+  padding-top: 5px !important;
+}
+
+.css-13xfq8m-MuiTabPanel-root {
+  padding: 0 !important;
+}

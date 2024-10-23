@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <main className="content">{children}</main>
         </Container>
       </div>
-
+      
       <style jsx>{`
         .layout {
           display: flex;
@@ -35,6 +35,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           // min-height: 100vh;
         }
       `}</style> */}
+
       </Box>
     </>
   );
