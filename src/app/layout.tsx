@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import React, { useEffect, useState } from "react";
 import ReactQueryProvider from "@/utils/react-query";
@@ -12,13 +12,13 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [hydrated, setHydrated] = useState(false);
+  // const [hydrated, setHydrated] = useState(false);
 
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  // useEffect(() => {
+  //   setHydrated(true);
+  // }, []);
 
-  if (!hydrated) return <div>Loading...</div>;
+  // if (!hydrated) return <div>Loading...</div>;
 
   return (
     <html lang="en" suppressHydrationWarning>
