@@ -1,7 +1,8 @@
+import { Box } from "@mui/material";
 import React from "react";
 
 const RoundwaySearch = () => {
-  return <div>RoundwaySearch</div>;
+  return <Box>RoundwaySearch</Box>;
 };
 
 export default RoundwaySearch;

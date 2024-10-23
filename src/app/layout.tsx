@@ -21,7 +21,7 @@ export default function DashboardLayout({
   if (!hydrated) return <div>Loading...</div>;
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body style={{ backgroundColor: "#F2F0F9" }}>
         <AuthCheck />
         <ReactQueryProvider>{children}</ReactQueryProvider>

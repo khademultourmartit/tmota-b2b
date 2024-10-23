@@ -3,9 +3,9 @@ import OnewaySearch from "./_components/OneWaySearch";
 
 const page = () => {
   return (
-    <div>
+    <>
       <OnewaySearch />
-    </div>
+    </>
   );
 };
 

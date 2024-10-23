@@ -7,36 +7,47 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
+import { getBannerData } from "@/features/banner/apis/service";
+import { useGetBannerQuery } from "@/features/banner/apis/queries";
 
 function HomeSlider() {
   const token = secureLocalStorage.getItem("accessToken");
-
   const [slider, setSlider] = useState([]);
   const [slideLoad, setSlideLoad] = useState([1, 2, 3, 4]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://82.112.238.135:88/banners?page=1&limit=10`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setSlider(response.data?.payload?.data);
-      } catch (err) {
-        console.log("err", err);
-      }
-    };
+  const params = {
+    page: "1",
+    limit: "20",
+    serviceType: "FLIGHT",
+    type: "Banner",
+  };
 
-    fetchData();
-  }, []);
+  const { data, isLoading, isError } = useGetBannerQuery(params);
 
-  const len = slider?.length > 4 ? 4 : slider?.length;
-  const laptopLen = slider?.length >= 3 ? 3 : slider?.length;
-  const tabLen = slider?.length >= 2 ? 2 : slider?.length;
+  console.log("dataTest", data);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await getBannerData();
+  //       setSlider(response.data?.payload?.data);
+  //       setLoading(false);
+  //     } catch (err) {
+  //       console.log("err", err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  const len = data?.payload?.data?.length > 4 ? 4 : data?.payload?.data?.length;
+  const laptopLen =
+    data?.payload?.data?.length >= 3 ? 3 : data?.payload?.data?.length;
+  const tabLen =
+    data?.payload?.data?.length >= 2 ? 2 : data?.payload?.data?.length;
+
+  console.log("len", len);
 
   const CustomNextArrow = (props: any) => {
     const { onClick } = props;
@@ -103,7 +114,7 @@ function HomeSlider() {
   };
 
   const settings = {
-    dots: false,
+    dots: data?.payload?.data.length !== 0 ? true : false,
     infinite: true,
     speed: 500,
     slidesToShow: len,
@@ -156,10 +167,10 @@ function HomeSlider() {
         justifyContent: { md: `${len > 3 ? "start" : "center"}` },
       }}
     >
-      {slider.length !== 0 ? (
+      {!isLoading ? (
         <>
           <Slider {...settings}>
-            {slider?.map((data: any, arr: any, index: any) => (
+            {data?.payload?.data?.map((data: any, arr: any, index: any) => (
               <div key={index}>
                 <Box
                   sx={{
@@ -170,7 +181,7 @@ function HomeSlider() {
                       sm: `${arr.length < 4 ? "180px" : null}`,
                       md: `${arr.length < 4 ? "180px" : null}`,
                     },
-                    height: "380px",
+                    height: "210px",
                     cursor: "pointer",
                     position: "relative",
                   }}
