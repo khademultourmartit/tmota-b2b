@@ -20,6 +20,7 @@ import MulticitySearchBox from "./MulticitySearchBox";
 import { useGetAirportSearchQuery } from "@/features/airport-search/apis/queries";
 import { airportSearch } from "@/features/airport-search/apis/service";
 import axios from "axios";
+import { getNoticeData } from "@/features/notice/apis/service";
 
 type MenuItem = {
   name: string;
@@ -41,6 +42,7 @@ interface Airport {
   activeRunways: string;
   airportElevation: string;
 }
+
 interface AirportPayload {
   cityCode: string;
   airportCode: string;
@@ -97,7 +99,6 @@ const BpCheckedIcon = styled(BpIcon)({
 
 const SearchBox = () => {
   const token = secureLocalStorage.getItem("accessToken");
-
   const [tabs, setTabs] = useState("Flight");
   const [currentMenu, setCurrentMenu] = useState("Oneway");
   const [travelerBoxOpen, setTravelerBoxOpen] = useState(false);
@@ -121,7 +122,6 @@ const SearchBox = () => {
   const [returnDate, setReturnDate] = useState(addDays(now.current, 0));
   const [notice, setNotice] = useState([]);
   const [open, setOpen] = useState(false);
-
   const today = new Date();
   const maxDate = new Date();
 
@@ -154,7 +154,6 @@ const SearchBox = () => {
     setTravelerBoxOpen(false);
   };
 
-  //todo: end of form Submit section
   const handleSelect = (date: any) => {
     setJourneyDate(date);
     setOpenJourneyDate(false);
@@ -167,7 +166,6 @@ const SearchBox = () => {
     setReturnDate(date);
     setOpenReturnDate(false);
   };
-  //  adult Increment
 
   function canIncrementMorethanNine(
     adultCount: any,
@@ -503,13 +501,8 @@ const SearchBox = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `http://82.112.238.135:88/notices?page=1&limit=10`;
       try {
-        const response = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await getNoticeData();
         setNotice(response.data?.payload?.data);
       } catch (err) {
         console.log("err", err);
@@ -603,7 +596,6 @@ const SearchBox = () => {
             )}
           </Box>
         </CardWrapper>
-
         <Box mt={3}>
           <Typography
             style={{
@@ -616,12 +608,13 @@ const SearchBox = () => {
           >
             <Marquee>
               {notice?.map((data: any) => (
-                <span key={data?.id}>{data?.description}</span>
+                <span style={{ marginRight: "16px" }} key={data?.id}>
+                  {data?.description}
+                </span>
               ))}
             </Marquee>
           </Typography>
         </Box>
-
         <Box mt={3}>
           <HomeSlider />
         </Box>
