@@ -9,7 +9,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body style={{ backgroundColor: "#F2F0F9" }}>
         <AuthCheck />
         <ReactQueryPvorider>{children}</ReactQueryPvorider>

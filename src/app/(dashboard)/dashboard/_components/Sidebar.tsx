@@ -1,19 +1,28 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { Box, Container, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import { sidebarMenu } from "../../../../../public/data-source/sidebar-menu";
 import LogOut from "../../../../../public/assests/menuicon/Logoutiutton.svg";
+import { logout } from "@/features/auth/apis/service";
 
 const Sidebar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [isOpen, setIsOpen] = useState(true);
   const [isVendorOpen, setIsVendorOpen] = useState(false);
-  const pathname = usePathname();
+
   const toggle = () => setIsOpen(!isOpen);
   const toggleVendor = () => setIsVendorOpen(!isVendorOpen);
+
+  const logOut = async () => {
+    await logout();
+    router.push("/");
+  };
 
   type MenuItem = {
     path: string;
@@ -41,7 +50,7 @@ const Sidebar = () => {
 
   const logoutContainerStyle = {
     marginBottom: "20px",
-    position: "absolute",
+    position: "absolute" as const,
     bottom: "0px",
     width: "100%",
   };
@@ -55,7 +64,6 @@ const Sidebar = () => {
   };
 
   const linkTextStyle = {
-    // display: isOpen ? "flex" : "none",
     fontSize: "13px",
     justifyContent: "space-between",
     alignItems: "center",
@@ -67,7 +75,6 @@ const Sidebar = () => {
     <Box
       sx={{
         display: { xs: "none", sm: "block" },
-
         position: "relative",
       }}
     >
@@ -77,7 +84,6 @@ const Sidebar = () => {
           color: "#B4B4CD",
           borderRadius: "5px",
           height: "100%",
-          // width: isOpen ? "195px" : "84px",
           boxShadow: "rgba(234, 232, 244, 0.95) 0px 0px 25px 0px",
           display: "flex",
           flexDirection: "column",
@@ -90,8 +96,8 @@ const Sidebar = () => {
         <Box>
           {menuItem.map((item, index) => (
             <React.Fragment key={index}>
-              <Link href={item.path} passHref>
-                <span style={linkStyle(item.path)}>
+              <Link href={item.path} passHref legacyBehavior>
+                <a style={linkStyle(item.path)}>
                   <Box>
                     <Image
                       src={item.icon}
@@ -111,19 +117,18 @@ const Sidebar = () => {
                       {item.name}
                     </span>
                   )}
-                </span>
+                </a>
               </Link>
             </React.Fragment>
           ))}
-
           <Box sx={logoutContainerStyle}>
             <span
+              onClick={logOut}
               style={{
                 ...linkStyle("/logout"),
                 backgroundColor: "#B4B4CD",
                 borderRadius: "10px",
                 color: "#FFFFFF",
-                justifySelf: "flex-end",
                 padding: isOpen ? "10px 15px" : "10px",
                 cursor: "pointer",
               }}
@@ -139,7 +144,7 @@ const Sidebar = () => {
               <div style={iconWrapperStyle}>
                 <Image width={15} src={LogOut} alt="Log Out" />
               </div>
-              <div style={linkTextStyle}>Log Out</div>
+              {isOpen && <div style={linkTextStyle}>Log Out</div>}
             </span>
           </Box>
         </Box>

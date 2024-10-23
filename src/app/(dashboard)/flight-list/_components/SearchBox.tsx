@@ -486,7 +486,6 @@ const SearchBox = () => {
             : [],
       },
     };
-
     const urlSegments = destinationData.searchCriteria?.originDestination
       ?.map((leg: any) => {
         const { locationCode: depCode } = leg.departure;
