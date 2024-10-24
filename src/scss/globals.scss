@@ -2,6 +2,7 @@
 @import "./table-common/table.scss";
 @import "./table-common/table-topbar.scss";
 @import "./table-common/table-pagination.scss";
+@import "./form-common/form.scss";
 
 :root {
   --background: $background-light;
@@ -335,3 +336,5 @@ input:-webkit-autofill:active {
   background-color: #ffffff;
   /* border-radius: 12px; */
 }
+
+

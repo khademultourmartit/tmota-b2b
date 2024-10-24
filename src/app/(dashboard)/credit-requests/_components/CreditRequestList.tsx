@@ -26,8 +26,8 @@ import {
   Search,
   RestartAlt,
 } from "@mui/icons-material";
-import { getCreditRequests } from "@/features/agent/credit-request/apis/service";
 import { CustomPaginationSelect } from "@/components/custom/CustomPaginationSelect";
+import { getCreditRequests } from "@/features/agent/credit-request/apis/service";
 import { CustomSearchInput } from "@/components/custom/CustomSearchInput";
 import { PaginationTheme } from "@/components/custom/PaginationTheme";
 import { useRouter } from "next/navigation";
@@ -115,7 +115,7 @@ const CreditRequestList = () => {
           />
           <Tab
             label="Approved"
-            value="APPROVED"
+            value="ACC_APPROVED"
             className={`approved-tab ${selectedTab === 2 ? "selected" : ""}`}
           />
           <Tab
