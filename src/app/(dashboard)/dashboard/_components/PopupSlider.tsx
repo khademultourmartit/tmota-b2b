@@ -18,7 +18,6 @@ const style = {
   py: { md: 4, sm: 4, xs: 5 },
   borderRadius: "4px",
   outline: "none",
-  //   height: { md: "90vh", sm: "50vh", xs: "50vh" },
 };
 
 const PopupSlider = () => {
@@ -46,7 +45,7 @@ const PopupSlider = () => {
   };
 
   const settings = {
-    arrows: false,
+    arrows: true,
     dots: true,
     fade: true,
     infinite: true,
@@ -79,8 +78,7 @@ const PopupSlider = () => {
             }}
             onClick={closeModal}
           />
-
-          <Box>
+          <Box className="popupSlider">
             <Slider {...settings}>
               {data?.payload?.data?.map((item: any, index: any) => (
                 <Box key={index}>
