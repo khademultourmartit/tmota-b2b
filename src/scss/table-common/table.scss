@@ -1,0 +1,132 @@
+/* Table Container */
+.table-container {
+  background-color: #ffffff;
+
+  .table {
+    min-width: 900px;
+    table-layout: auto;
+    background-color: #fff;
+
+    thead {
+      background-color: #c3a0cd;
+      color: #ffffff;
+      font-weight: 500;
+
+      .table-header-cell {
+        padding: 5px;
+        text-align: center;
+        font-family: "Outfit", sans-serif;
+        color: #fff;
+      }
+    }
+
+    tbody {
+      .table-body-cell {
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px;
+        color: #6e6996;
+        cursor: pointer;
+        font-family: "Outfit", sans-serif;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding: 8px;
+      }
+
+      .expand-row {
+        background-color: #f2f0f9;
+
+        .expand-cell {
+          padding-top: 0;
+          padding-bottom: 0;
+
+          .expand-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            border-radius: 4px;
+            padding: 8px;
+
+            .typography {
+              font-size: 12px;
+              font-family: "Outfit", sans-serif;
+              font-weight: 400;
+              color: #6e6996;
+            }
+          }
+        }
+      }
+
+      .collapsed-row {
+        background-color: #ffffff;
+      }
+
+      .collapsed-icon-button {
+        color: #b4b4cd;
+        border: solid 1px #b4b4cd;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+// Table Tab Section
+.tabs-container {
+  margin-bottom: 16px;
+
+  .MuiTabs-indicator {
+    background-color: #a56eb4;
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .MuiTab-root {
+    text-transform: none;
+    font-weight: normal;
+    color: #b4b4cd;
+
+    &.Mui-selected {
+      color: #6e6996;
+      font-size: 15px;
+    }
+  }
+
+  .all-tab {
+    font-weight: normal;
+
+    &.selected {
+      font-weight: 600;
+      color: #6e6996;
+    }
+  }
+
+  .pending-tab {
+    font-weight: normal;
+
+    &.selected {
+      font-weight: 600;
+      color: #6e6996;
+    }
+  }
+
+  .approved-tab {
+    font-weight: normal;
+
+    &.selected {
+      font-weight: 600;
+      color: #6e6996;
+    }
+  }
+
+  .rejected-tab {
+    font-weight: normal;
+
+    &.selected {
+      font-weight: 600;
+      color: #6e6996;
+    }
+  }
+}
