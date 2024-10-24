@@ -15,6 +15,7 @@ import AirportListsCard from "./AirportListsCard";
 import SamePlaceError from "./SamePlaceError";
 import Link from "next/link";
 import zIndex from "@mui/material/styles/zIndex";
+import "../../../../scss/flight-search/flight-search.scss";
 
 const OnewayAndRoundway = ({
   openFrom,
@@ -67,8 +68,6 @@ const OnewayAndRoundway = ({
   setOpenReturnDate,
   setCurrentMenu,
 }: any) => {
-
-  
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -81,9 +80,10 @@ const OnewayAndRoundway = ({
     setDateRange([ranges.selection]);
     setJourneyDate(ranges.selection.startDate);
     setReturnDate(ranges.selection.endDate);
-    if (ranges.selection.endDate > ranges.selection.startDate) {
-      setOpenReturnDate(false);
-    }
+
+    // if (ranges.selection.endDate > ranges.selection.startDate) {
+    //   setOpenReturnDate(false);
+    // }
   };
 
   const startDate = new Date(journeyDate);
@@ -206,314 +206,425 @@ const OnewayAndRoundway = ({
 
   return (
     <>
-      <Grid
-        sx={{
-          height: "fit-content",
-          width: "100%",
-        }}
-        container
-        rowSpacing={{ lg: 0, md: 1, sm: 1, xs: 1 }}
-        columnSpacing={0.1}
-      >
+      <Box className="">
         <Grid
-          item
-          container
-          xs={12}
-          sm={12}
-          md={12}
-          lg={5.4}
-          style={{
-            border: "1px solid #D9D5EC",
-            padding: "10px",
+          sx={{
+            height: "fit-content",
+            width: "100%",
           }}
+          container
+          rowSpacing={{ lg: 0, md: 1, sm: 1, xs: 1 }}
+          columnSpacing={0.1}
         >
           <Grid
             item
+            container
             xs={12}
             sm={12}
-            md={6}
-            lg={6}
-            sx={{
-              position: "relative",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpenFrom((prev: boolean) => !prev);
-              setOpenTo(false);
-              setTravelerBoxOpen(false);
-              setClassBoxOpen(false);
-              setOpenReturnDate(false);
+            md={12}
+            lg={5.3}
+            style={{
+              border: "1px solid #D9D5EC",
+              padding: "10px",
             }}
           >
-            <Box sx={{ position: "relative" }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-                <Image src={Plan} alt="plan Icon" />
-                <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
-                  From
-                </Typography>
-              </Box>
-              {openFrom ? (
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "#003566",
-                    backgroundColor: "#fff",
-                  }}
-                >
-                  <input
-                    autoComplete="off"
-                    autoFocus
-                    onChange={(e) => setSearchKeyword(e.target.value)}
-                    placeholder="Search an airport..."
-                    style={{
-                      color: "#9493BD",
-                      fontWeight: 500,
-                      width: "100%",
-                      height: "40px",
-                      backgroundColor: "transparent",
-                      border: "none",
-                      outline: "none",
-                      paddingTop: "10px",
-                    }}
-                  />
-                </Box>
-              ) : fromSearchText?.airportCode === toSearchText?.airportCode ? (
-                <Box pt={5.5}>
-                  <SamePlaceError />
-                </Box>
-              ) : (
-                <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
-                  <Box
-                    sx={{
-                      height: "36px",
-                      bgcolor: "#F2F0F9",
-                      width: "55px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography sx={{ color: "#6E0A82", fontWeight: "500" }}>
-                      {fromSearchText?.airportCode}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography
-                      sx={{
-                        color: "#2D233C",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {fromSearchText?.cityName},{fromSearchText?.countryName}
-                    </Typography>
-                    <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                      {fromSearchText?.airportName}
-                    </Typography>
-                  </Box>
-                </Box>
-              )}
-
-              {openFrom && (
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: "120%",
-                    left: "0",
-                    right: "0",
-                    width: "100%",
-                    backgroundColor: "#ffffff",
-                    height: "fit-content",
-                    zIndex: 100,
-                    border: "1px solid #6E0A82",
-                  }}
-                >
-                  <Box>{fromGetSuggetion()}</Box>
-                </Box>
-              )}
-
-              <Image
-                onClick={handleReverseDestination}
-                className="switch-image-btn"
-                width={25}
-                src={reverse}
-                alt="reverse icon"
-              />
-            </Box>
-          </Grid>
-
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={6}
-            lg={6}
-            sx={{
-              position: "relative",
-            }}
-            onClick={() => {
-              setOpenTo((prev: boolean) => !prev);
-              setOpenFrom(false);
-              setTravelerBoxOpen(false);
-              setClassBoxOpen(false);
-              setOpenReturnDate(false);
-            }}
-          >
-            <Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-                <Image src={ToPlane} alt="plan Icon" />
-                <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
-                  To
-                </Typography>
-              </Box>
-
-              {openTo ? (
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "#003566",
-                    backgroundColor: "#fff",
-                  }}
-                >
-                  <input
-                    autoComplete="off"
-                    autoFocus
-                    onChange={(e) => setSearchKeyword(e.target.value)}
-                    placeholder="Search an airport..."
-                    style={{
-                      color: "#9493BD",
-                      fontWeight: 500,
-                      width: "100%",
-                      height: "40px",
-                      backgroundColor: "transparent",
-                      border: "none",
-                      outline: "none",
-                      paddingTop: "10px",
-                    }}
-                  />
-                </Box>
-              ) : fromSearchText?.airportCode === toSearchText?.airportCode ? (
-                <SamePlaceError />
-              ) : (
-                <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
-                  <Box
-                    sx={{
-                      height: "36px",
-                      bgcolor: "#F2F0F9",
-                      width: "55px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography sx={{ color: "#6E0A82", fontWeight: "500" }}>
-                      {toSearchText?.airportCode}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography
-                      sx={{
-                        color: "#2D233C",
-                        fontSize: "14px",
-                        textWrap: "nowrap",
-                      }}
-                    >
-                      {toSearchText?.cityName},{toSearchText?.countryName}
-                    </Typography>
-                    <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                      {toSearchText?.airportName}
-                    </Typography>
-                  </Box>
-                </Box>
-              )}
-
-              {openTo && (
-                <Box
-                  style={{
-                    position: "absolute",
-                    top: "120%",
-                    left: "0",
-                    right: "0",
-                    width: "100%",
-                    backgroundColor: "#ffffff",
-                    height: "fit-content",
-                    zIndex: 100,
-                    border: "1px solid #6E0A82",
-                  }}
-                >
-                  <Box>{toGetSuggetion()}</Box>
-                </Box>
-              )}
-            </Box>
-          </Grid>
-        </Grid>
-
-        {/*  date */}
-
-        <Grid
-          item
-          container
-          xs={12}
-          sm={12}
-          md={12}
-          lg={3.6}
-          style={{
-            border: "1px solid #D9D5EC",
-            padding: "10px",
-            position: "relative",
-          }}
-          ml={{
-            md: 0,
-            lg: 1.5,
-            xs: 0,
-          }}
-          mt={{
-            xs: 1,
-            sm: 0,
-            md: 1,
-            lg: 0,
-          }}
-        >
-          {currentMenu === "Oneway" && (
             <Grid
               item
               xs={12}
               sm={12}
-              md={12}
-              lg={12}
+              md={6}
+              lg={6}
               sx={{
                 position: "relative",
               }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenFrom((prev: boolean) => !prev);
+                setOpenTo(false);
+                setTravelerBoxOpen(false);
+                setClassBoxOpen(false);
+                setOpenReturnDate(false);
+              }}
             >
-              <Box
+              <Box sx={{ position: "relative" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <Image src={Plan} alt="plan Icon" />
+                  <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
+                    From
+                  </Typography>
+                </Box>
+                {openFrom ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      color: "#003566",
+                      backgroundColor: "#fff",
+                    }}
+                  >
+                    <input
+                      autoComplete="off"
+                      autoFocus
+                      onChange={(e) => setSearchKeyword(e.target.value)}
+                      placeholder="Search an airport..."
+                    />
+                  </Box>
+                ) : fromSearchText?.airportCode ===
+                  toSearchText?.airportCode ? (
+                  <Box pt={5.5}>
+                    <SamePlaceError />
+                  </Box>
+                ) : (
+                  <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
+                    <Box
+                      sx={{
+                        height: "36px",
+                        bgcolor: "#F2F0F9",
+                        width: "55px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography sx={{ color: "#6E0A82", fontWeight: "500" }}>
+                        {fromSearchText?.airportCode}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          color: "#2D233C",
+                          fontSize: "14px",
+                        }}
+                      >
+                        {fromSearchText?.cityName},{fromSearchText?.countryName}
+                      </Typography>
+                      <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
+                        {fromSearchText?.airportName}
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+
+                {openFrom && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: "120%",
+                      left: "0",
+                      right: "0",
+                      width: "100%",
+                      backgroundColor: "#ffffff",
+                      height: "fit-content",
+                      zIndex: 100,
+                      border: "1px solid #6E0A82",
+                    }}
+                  >
+                    <Box>{fromGetSuggetion()}</Box>
+                  </Box>
+                )}
+
+                <Image
+                  onClick={handleReverseDestination}
+                  className="switch-image-btn"
+                  width={25}
+                  src={reverse}
+                  alt="reverse icon"
+                />
+              </Box>
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              lg={6}
+              sx={{
+                position: "relative",
+              }}
+              onClick={() => {
+                setOpenTo((prev: boolean) => !prev);
+                setOpenFrom(false);
+                setTravelerBoxOpen(false);
+                setClassBoxOpen(false);
+                setOpenReturnDate(false);
+              }}
+            >
+              <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <Image src={ToPlane} alt="plan Icon" />
+                  <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
+                    To
+                  </Typography>
+                </Box>
+
+                {openTo ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      color: "#003566",
+                      backgroundColor: "#fff",
+                    }}
+                  >
+                    <input
+                      autoComplete="off"
+                      autoFocus
+                      onChange={(e) => setSearchKeyword(e.target.value)}
+                      placeholder="Search an airport..."
+                      style={{
+                        color: "#9493BD",
+                        fontWeight: 500,
+                        width: "100%",
+                        height: "40px",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        outline: "none",
+                        paddingTop: "10px",
+                      }}
+                    />
+                  </Box>
+                ) : fromSearchText?.airportCode ===
+                  toSearchText?.airportCode ? (
+                  <SamePlaceError />
+                ) : (
+                  <Box sx={{ display: "flex", gap: "10px" }} mt={1}>
+                    <Box
+                      sx={{
+                        height: "36px",
+                        bgcolor: "#F2F0F9",
+                        width: "55px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography sx={{ color: "#6E0A82", fontWeight: "500" }}>
+                        {toSearchText?.airportCode}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          color: "#2D233C",
+                          fontSize: "14px",
+                          textWrap: "nowrap",
+                        }}
+                      >
+                        {toSearchText?.cityName},{toSearchText?.countryName}
+                      </Typography>
+                      <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
+                        {toSearchText?.airportName}
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+
+                {openTo && (
+                  <Box
+                    style={{
+                      position: "absolute",
+                      top: "120%",
+                      left: "0",
+                      right: "0",
+                      width: "100%",
+                      backgroundColor: "#ffffff",
+                      height: "fit-content",
+                      zIndex: 100,
+                      border: "1px solid #6E0A82",
+                    }}
+                  >
+                    <Box>{toGetSuggetion()}</Box>
+                  </Box>
+                )}
+              </Box>
+            </Grid>
+          </Grid>
+
+          {/*  date */}
+
+          <Grid
+            item
+            container
+            xs={12}
+            sm={12}
+            md={12}
+            lg={3.7}
+            style={{
+              border: "1px solid #D9D5EC",
+              padding: "10px",
+              position: "relative",
+            }}
+            ml={{
+              md: 0,
+              lg: 1.5,
+              xs: 0,
+            }}
+            mt={{
+              xs: 1,
+              sm: 0,
+              md: 1,
+              lg: 0,
+            }}
+          >
+            {currentMenu === "Oneway" && (
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  flexDirection: { md: "column", lg: "row" },
+                  position: "relative",
                 }}
               >
                 <Box
                   sx={{
-                    cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: { md: "column", lg: "row" },
                   }}
+                >
+                  <Box
+                    sx={{
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      setOpenJourneyDate((prev: boolean) => !prev);
+                      setOpenReturnDate(false);
+                      setOpenFrom(false);
+                      setOpenTo(false);
+                      setTravelerBoxOpen(false);
+                      setClassBoxOpen(false);
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <Image src={calender} alt="plan Icon" />
+                      <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
+                        Departure
+                      </Typography>
+                    </Box>
+
+                    <Box mt={1} sx={{ display: "flex", gap: "10px" }}>
+                      <Box
+                        sx={{
+                          height: "36px",
+                          bgcolor: "#F2F0F9",
+                          width: "55px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography
+                          sx={{ color: "#6E0A82", fontWeight: "500" }}
+                        >
+                          {moment(journeyDate).format("DD")}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography sx={{ color: "#2D233C", fontSize: "14px" }}>
+                          {moment(journeyDate).format("MMMM")}
+                        </Typography>
+                        <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
+                          {moment(journeyDate).format("dddd")},{" "}
+                          {moment(journeyDate).format("YYYY")}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      width: "1px",
+                      border: "1px solid #D9D5EC",
+                    }}
+                  ></Box>
+                  <Box
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setCurrentMenu("Round Trip");
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <Image src={calender} alt="plan Icon" />
+                      <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
+                        Add Return
+                      </Typography>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        textAlign: "center",
+                      }}
+                    >
+                      <AddIcon
+                        sx={{
+                          fontSize: "40px",
+                          color: "#9493BD",
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+
+                {openJourneyDate && (
+                  <Box>
+                    <Calendar
+                      className={"dashboard-calendar"}
+                      color="#A56EB4"
+                      date={new Date(journeyDate)}
+                      direction="horizontal"
+                      minDate={today}
+                      onChange={handleSelect}
+                    />
+                  </Box>
+                )}
+              </Grid>
+            )}
+
+            {currentMenu === "Round Trip" && (
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                sx={{
+                  position: "relative",
+                }}
+              >
+                <Box
+                  sx={{ display: "flex", justifyContent: "space-between" }}
                   onClick={() => {
-                    setOpenJourneyDate((prev: boolean) => !prev);
-                    setOpenReturnDate(false);
+                    setOpenReturnDate((prev: boolean) => !prev);
+                    setOpenJourneyDate(false);
                     setOpenFrom(false);
                     setOpenTo(false);
                     setTravelerBoxOpen(false);
@@ -522,396 +633,291 @@ const OnewayAndRoundway = ({
                 >
                   <Box
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
+                      cursor: "pointer",
                     }}
                   >
-                    <Image src={calender} alt="plan Icon" />
-                    <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
-                      Departure
-                    </Typography>
-                  </Box>
-
-                  <Box mt={1} sx={{ display: "flex", gap: "10px" }}>
                     <Box
                       sx={{
-                        height: "36px",
-                        bgcolor: "#F2F0F9",
-                        width: "55px",
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center",
+                        gap: "10px",
                       }}
                     >
-                      <Typography sx={{ color: "#6E0A82", fontWeight: "500" }}>
-                        {moment(journeyDate).format("DD")}
+                      <Image src={calender} alt="plan Icon" />
+                      <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
+                        Departure
                       </Typography>
                     </Box>
-                    <Box>
-                      <Typography sx={{ color: "#2D233C", fontSize: "14px" }}>
-                        {moment(journeyDate).format("MMMM")}
-                      </Typography>
-                      <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                        {moment(journeyDate).format("dddd")},{" "}
-                        {moment(journeyDate).format("YYYY")}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    width: "1px",
-                    border: "1px solid #D9D5EC",
-                  }}
-                ></Box>
-                <Box
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setCurrentMenu("Round Trip");
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
-                    <Image src={calender} alt="plan Icon" />
-                    <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
-                      Add Return
-                    </Typography>
-                  </Box>
 
+                    <Box mt={1} sx={{ display: "flex", gap: "10px" }}>
+                      <Box
+                        sx={{
+                          height: "36px",
+                          bgcolor: "#F2F0F9",
+                          width: "55px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography
+                          sx={{ color: "#6E0A82", fontWeight: "500" }}
+                        >
+                          {moment(journeyDate).format("DD")}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography sx={{ color: "#2D233C", fontSize: "14px" }}>
+                          {moment(journeyDate).format("MMMM")}
+                        </Typography>
+                        <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
+                          {moment(journeyDate).format("dddd")},{" "}
+                          {moment(journeyDate).format("YYYY")}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
                   <Box
                     sx={{
-                      textAlign: "center",
+                      width: "1px",
+                      border: "1px solid #D9D5EC",
+                    }}
+                  ></Box>
+                  <Box
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setCurrentMenu("Round Trip");
                     }}
                   >
-                    <AddIcon
+                    <Box
                       sx={{
-                        fontSize: "40px",
-                        color: "#9493BD",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
                       }}
-                    />
+                    >
+                      <Image src={calender} alt="plan Icon" />
+                      <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
+                        Add Return
+                      </Typography>
+                    </Box>
+
+                    <Box mt={1} sx={{ display: "flex", gap: "10px" }}>
+                      <Box
+                        sx={{
+                          height: "35px",
+                          bgcolor: "#F2F0F9",
+                          width: "55px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography
+                          sx={{ color: "#6E0A82", fontWeight: "500" }}
+                        >
+                          {moment(returnDate).format("DD")}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography sx={{ color: "#2D233C", fontSize: "14px" }}>
+                          {moment(returnDate).format("MMMM")}
+                        </Typography>
+                        <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
+                          {moment(returnDate).format("dddd")},{" "}
+                          {moment(returnDate).format("YYYY")}
+                        </Typography>
+                      </Box>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
 
-              {openJourneyDate && (
-                <Box>
-                  <Calendar
-                    className={"dashboard-calendar"}
-                    color="#A56EB4"
-                    date={new Date(journeyDate)}
-                    direction="horizontal"
-                    minDate={today}
-                    onChange={handleSelect}
-                  />
-                </Box>
-              )}
-            </Grid>
-          )}
+                {openReturnDate && (
+                  <Box>
+                    <DateRangePicker
+                      ranges={dateRange}
+                      onChange={handleSelectReturnDate}
+                      minDate={today}
+                      months={2}
+                      rangeColors={["#A56EB4"]}
+                      direction="horizontal"
+                      className={"return-calendar"}
+                    />
 
-          {currentMenu === "Round Trip" && (
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        right: { md: "60px", sm: "50px", xs: "38px" },
+                        top: { md: "440px", sm: "45px", xs: "42px" },
+                        zIndex: "9999",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          padding: "5px 0px",
+                          textAlign: "center",
+                          fontSize: "12px",
+                          color: "#a56eb4",
+                        }}
+                      >
+                        {differenceInDays + 1} Days
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+              </Grid>
+            )}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            lg={1.8}
+            sx={{
+              position: "relative",
+            }}
+            ml={{
+              md: 0,
+              lg: 1.5,
+              xs: 0,
+            }}
+            mt={{
+              xs: 1,
+              sm: 0,
+            }}
+          >
+            <Box
               sx={{
-                position: "relative",
+                border: "1px solid #D9D5EC",
+                padding: "10px",
               }}
             >
-              <Box
-                sx={{ display: "flex", justifyContent: "space-between" }}
-                onClick={() => {
-                  setOpenReturnDate((prev: boolean) => !prev);
-                  setOpenJourneyDate(false);
-                  setOpenFrom(false);
-                  setOpenTo(false);
-                  setTravelerBoxOpen(false);
-                  setClassBoxOpen(false);
-                }}
-              >
+              <Box>
                 <Box
                   sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
                     cursor: "pointer",
                   }}
+                  onClick={() => {
+                    setClassBoxOpen((prev: boolean) => !prev);
+                    setOpenFrom(false);
+                    setOpenTo(false);
+                    setTravelerBoxOpen(false);
+                    setOpenReturnDate(false);
+                  }}
                 >
-                  <Box
+                  <Image src={calender} alt="plan Icon" />
+                  <Typography
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
+                      fontSize: "14px",
+                      color: "#2D233C",
+                      fontWeight: 500,
                     }}
                   >
-                    <Image src={calender} alt="plan Icon" />
-                    <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
-                      Departure
-                    </Typography>
-                  </Box>
-
-                  <Box mt={1} sx={{ display: "flex", gap: "10px" }}>
-                    <Box
-                      sx={{
-                        height: "36px",
-                        bgcolor: "#F2F0F9",
-                        width: "55px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography sx={{ color: "#6E0A82", fontWeight: "500" }}>
-                        {moment(journeyDate).format("DD")}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography sx={{ color: "#2D233C", fontSize: "14px" }}>
-                        {moment(journeyDate).format("MMMM")}
-                      </Typography>
-                      <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                        {moment(journeyDate).format("dddd")},{" "}
-                        {moment(journeyDate).format("YYYY")}
-                      </Typography>
-                    </Box>
-                  </Box>
+                    {className}
+                  </Typography>
                 </Box>
+
                 <Box
                   sx={{
-                    width: "1px",
                     border: "1px solid #D9D5EC",
+                    width: "100%",
                   }}
+                  my={1.5}
                 ></Box>
                 <Box
-                  sx={{ cursor: "pointer" }}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    cursor: "pointer",
+                  }}
                   onClick={() => {
-                    setCurrentMenu("Round Trip");
+                    setTravelerBoxOpen((prev: boolean) => !prev);
+                    setOpenFrom(false);
+                    setOpenTo(false);
+                    setClassBoxOpen(false);
+                    setOpenReturnDate(false);
                   }}
                 >
-                  <Box
+                  <Image src={calender} alt="plan Icon" />
+                  <Typography
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
+                      fontSize: "14px",
+                      color: "#2D233C",
+                      fontWeight: 500,
                     }}
                   >
-                    <Image src={calender} alt="plan Icon" />
-                    <Typography sx={{ fontSize: "12px", color: "#9493BD" }}>
-                      Add Return
-                    </Typography>
-                  </Box>
-
-                  <Box mt={1} sx={{ display: "flex", gap: "10px" }}>
-                    <Box
-                      sx={{
-                        height: "35px",
-                        bgcolor: "#F2F0F9",
-                        width: "55px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography sx={{ color: "#6E0A82", fontWeight: "500" }}>
-                        {moment(returnDate).format("DD")}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography sx={{ color: "#2D233C", fontSize: "14px" }}>
-                        {moment(returnDate).format("MMMM")}
-                      </Typography>
-                      <Typography sx={{ color: "#6E6996", fontSize: "11px" }}>
-                        {moment(returnDate).format("dddd")},{" "}
-                        {moment(returnDate).format("YYYY")}
-                      </Typography>
-                    </Box>
-                  </Box>
+                    {totalPassenger} Traveler
+                  </Typography>
                 </Box>
-              </Box>
 
-              {openReturnDate && (
-                <Box>
-                  <DateRangePicker
-                    ranges={dateRange}
-                    onChange={handleSelectReturnDate}
-                    minDate={today}
-                    months={2}
-                    rangeColors={["#A56EB4"]}
-                    direction="horizontal"
-                    className={"return-calendar"}
+                {travelerBoxOpen && (
+                  <TravelerBox
+                    {...{
+                      adultDecrement,
+                      adultCount,
+                      adultInclement,
+                      childDecrement,
+                      childCount,
+                      childIncrement,
+                      kidDecrement,
+                      kidCount,
+                      kidInclement,
+                      infantDecrement,
+                      infantCount,
+                      infantIncrement,
+                      infantWithSeatIncrement,
+                      infantWithSeatCount,
+                      infantWithSeatDecrement,
+                      handleClose,
+                    }}
                   />
+                )}
 
-                  {/* <Box className={"return-date-count"}>
-                    <Typography
-                      sx={{
-                        padding: "5px 0px",
-                        textAlign: "center",
-                        color: "#ffffff",
-                        fontSize: "12px",
-                      }}
-                    >
-                      {differenceInDays + 1} Days
-                    </Typography>
-                  </Box> */}
-                </Box>
-              )}
-            </Grid>
-          )}
-        </Grid>
-
-        {/*  //todo: Passenger info */}
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={12}
-          lg={1.8}
-          sx={{
-            position: "relative",
-          }}
-          ml={{
-            md: 0,
-            lg: 1.5,
-            xs: 0,
-          }}
-          mt={{
-            xs: 1,
-            sm: 0,
-          }}
-        >
-          <Box
-            sx={{
-              border: "1px solid #D9D5EC",
-              padding: "10px",
-            }}
-          >
-            <Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setClassBoxOpen((prev: boolean) => !prev);
-                  setOpenFrom(false);
-                  setOpenTo(false);
-                  setTravelerBoxOpen(false);
-                  setOpenReturnDate(false);
-                }}
-              >
-                <Image src={calender} alt="plan Icon" />
-                <Typography
-                  sx={{
-                    fontSize: "14px",
-                    color: "#2D233C",
-                    fontWeight: 500,
-                  }}
-                >
-                  {className}
-                </Typography>
+                {classBoxOpen && (
+                  <FlightClassNamesBox {...{ className, handleClassName }} />
+                )}
               </Box>
-
-              <Box
-                sx={{
-                  border: "1px solid #D9D5EC",
-                  width: "100%",
-                }}
-                my={1.5}
-              ></Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setTravelerBoxOpen((prev: boolean) => !prev);
-                  setOpenFrom(false);
-                  setOpenTo(false);
-                  setClassBoxOpen(false);
-                  setOpenReturnDate(false);
-                }}
-              >
-                <Image src={calender} alt="plan Icon" />
-                <Typography
-                  sx={{
-                    fontSize: "14px",
-                    color: "#2D233C",
-                    fontWeight: 500,
-                  }}
-                >
-                  {totalPassenger} Traveler
-                </Typography>
-              </Box>
-
-              {travelerBoxOpen && (
-                <TravelerBox
-                  {...{
-                    adultDecrement,
-                    adultCount,
-                    adultInclement,
-                    childDecrement,
-                    childCount,
-                    childIncrement,
-                    kidDecrement,
-                    kidCount,
-                    kidInclement,
-                    infantDecrement,
-                    infantCount,
-                    infantIncrement,
-                    infantWithSeatIncrement,
-                    infantWithSeatCount,
-                    infantWithSeatDecrement,
-                    handleClose,
-                  }}
-                />
-              )}
-
-              {classBoxOpen && (
-                <FlightClassNamesBox {...{ className, handleClassName }} />
-              )}
             </Box>
-          </Box>
-        </Grid>
+          </Grid>
 
-        <Grid
-          item
-          xs={12}
-          lg={0.7}
-          ml={{
-            sm: 1.5,
-            md: 0,
-            lg: 1.5,
-            xs: 0,
-          }}
-          mt={{
-            xs: 1,
-            sm: 0,
-          }}
-          onClick={handleSearch}
-        >
-          <button
-            style={{
-              border: "none",
-              background: "#A56EB4",
-              color: "#fff",
-              cursor: "pointer",
-              width: "100%",
-              height: "100%",
-              borderRadius: "3px",
+          <Grid
+            item
+            xs={12}
+            lg={0.7}
+            ml={{
+              sm: 1.5,
+              md: 0,
+              lg: 1.5,
+              xs: 0,
             }}
+            mt={{
+              xs: 1,
+              sm: 0,
+            }}
+            onClick={handleSearch}
           >
-            Search
-          </button>
+            <button
+              style={{
+                border: "none",
+                background: "#A56EB4",
+                color: "#fff",
+                cursor: "pointer",
+                width: "100%",
+                height: "100%",
+                borderRadius: "3px",
+              }}
+            >
+              Search
+            </button>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </>
   );
 };

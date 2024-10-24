@@ -29,7 +29,7 @@ export const sidebarMenu = [
     isEnabled: true,
     isAccessable: true,
     icon: Accounts,
-    path: "/deposit-request",
+    path: "/deposit-requests",
   },
   {
     name: "Credit Request",
@@ -37,7 +37,7 @@ export const sidebarMenu = [
     isEnabled: true,
     isAccessable: true,
     icon: Accounts,
-    path: "/credit-request",
+    path: "/credit-requests",
   },
   {
     name: "Profile",

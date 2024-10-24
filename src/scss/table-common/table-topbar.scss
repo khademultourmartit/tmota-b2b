@@ -1,0 +1,116 @@
+/* Top Bar */
+.topbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  margin-bottom: 16px;
+
+  .search-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+
+    .placeholderColor {
+      position: relative;
+
+      .search-icon {
+        position: absolute;
+        top: 7px;
+        left: 5px;
+        color: #b4b4cd;
+        z-index: 1;
+      }
+
+      .custom-search-input {
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f2f0f9;
+      }
+    }
+
+    .pagination-section {
+      display: flex;
+      align-items: center;
+      background-color: #f2f0f9;
+      border-radius: 4px;
+      padding: 5px;
+
+      .typography {
+        font-family: "Outfit", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #b4b4cd;
+        padding: 0 4px;
+        padding-right: 10px;
+      }
+
+      .custom-pagination-select {
+        background-color: #ffffff;
+        height: 25px;
+        border: none;
+        color: #b4b4cd;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+
+    .filter-section,
+    .reset-section {
+      display: flex;
+      align-items: center;
+      background-color: #f2f0f9;
+      border-radius: 4px;
+      padding: 5px;
+
+      .typography {
+        font-family: "Outfit", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #b4b4cd;
+        padding: 0 4px;
+        padding-right: 10px;
+      }
+
+      .filter-icon {
+        color: #b4b4cd;
+        background-color: #ffffff;
+        padding: 2px 4px;
+        font-size: 25px;
+        border-radius: 5px;
+      }
+
+      .reset-icon {
+        color: #b4b4cd;
+        background-color: #ffffff;
+        padding: 2px 4px;
+        font-size: 25px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .button-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .add-button {
+      background-color: #6e0a82;
+      color: #ffffff;
+      border-radius: 5px;
+      padding: 9px 12px;
+      font-family: "Outfit", sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: none;
+      box-shadow: none;
+      border: none;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}
