@@ -69,11 +69,13 @@ a {
 
 .return-date-count {
   position: absolute;
-  top: 360px;
-  left: -102px;
   z-index: 9999;
   width: 665px;
-  background-color: #9493bd;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 90%;
+  margin: 0 auto;
+  transform: translateX(0);
 }
 
 .rdrNextPrevButton {
@@ -171,6 +173,13 @@ a {
   }
 }
 
+<<<<<<< HEAD
+=======
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+>>>>>>> 3c4203924105f1734e8b9c5c1d1aeccc9d9a7c24
 // global components scss
 .placeholderColor input::placeholder {
   color: $color-placeholder;
@@ -331,6 +340,7 @@ input:-webkit-autofill:active {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .main-box {
   padding: 16px;
   background-color: #ffffff;
@@ -338,3 +348,30 @@ input:-webkit-autofill:active {
 }
 
 
+=======
+.css-13xfq8m-MuiTabPanel-root {
+  padding: 0 !important;
+}
+
+// slick slider dot coloer
+
+.popupSlider .slick-dots li button:before {
+  font-size: 13px;
+  line-height: 20px;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  content: "•";
+  text-align: center;
+  opacity: 0.75;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.popupSlider .slick-dots li.slick-active button:before {
+  opacity: 0.75;
+  color: $theme-active;
+}
+>>>>>>> 3c4203924105f1734e8b9c5c1d1aeccc9d9a7c24

@@ -10,7 +10,7 @@ import axios from "axios";
 import { getBannerData } from "@/features/banner/apis/service";
 import { useGetBannerQuery } from "@/features/banner/apis/queries";
 
-function HomeSlider() {
+function DashboardBanner() {
   const token = secureLocalStorage.getItem("accessToken");
   const [slider, setSlider] = useState([]);
   const [slideLoad, setSlideLoad] = useState([1, 2, 3, 4]);
@@ -25,29 +25,11 @@ function HomeSlider() {
 
   const { data, isLoading, isError } = useGetBannerQuery(params);
 
-  console.log("dataTest", data);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await getBannerData();
-  //       setSlider(response.data?.payload?.data);
-  //       setLoading(false);
-  //     } catch (err) {
-  //       console.log("err", err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   const len = data?.payload?.data?.length > 4 ? 4 : data?.payload?.data?.length;
   const laptopLen =
     data?.payload?.data?.length >= 3 ? 3 : data?.payload?.data?.length;
   const tabLen =
     data?.payload?.data?.length >= 2 ? 2 : data?.payload?.data?.length;
-
-  console.log("len", len);
 
   const CustomNextArrow = (props: any) => {
     const { onClick } = props;
@@ -60,7 +42,7 @@ function HomeSlider() {
           position: "absolute",
           height: "100%",
           right: "-20px",
-          top: "-100px",
+          top: "0px",
           zIndex: 1,
           display: "flex",
           alignItems: "center",
@@ -92,7 +74,7 @@ function HomeSlider() {
           position: "absolute",
           height: "100%",
           left: "-20px",
-          top: "-100px",
+          top: "0px",
           zIndex: 1,
           display: "flex",
           alignItems: "center",
@@ -114,7 +96,7 @@ function HomeSlider() {
   };
 
   const settings = {
-    dots: data?.payload?.data.length !== 0 ? true : false,
+    dots: isLoading ? false : true,
     infinite: true,
     speed: 500,
     slidesToShow: len,
@@ -166,6 +148,7 @@ function HomeSlider() {
         display: { md: `${len > 3 ? "block" : "flex"}` },
         justifyContent: { md: `${len > 3 ? "start" : "center"}` },
       }}
+      className={"popupSlider"}
     >
       {!isLoading ? (
         <>
@@ -190,11 +173,12 @@ function HomeSlider() {
                     <Box
                       sx={{
                         backgroundImage: `url(${data?.imgUrl})`,
-                        width: "95%",
+                        width: "97%",
                         height: "200px",
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "bottom",
+                        margin: "0 auto",
                       }}
                     ></Box>
                   </Box>
@@ -243,4 +227,4 @@ function HomeSlider() {
   );
 }
 
-export default HomeSlider;
+export default DashboardBanner;
