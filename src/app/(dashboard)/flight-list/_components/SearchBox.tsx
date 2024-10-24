@@ -15,12 +15,13 @@ import CardWrapper from "@/app/(dashboard)/flight-list/_components/CardWrapper";
 import Marquee from "react-fast-marquee";
 import OnewayAndRoundway from "./OnewayAndRoundway";
 import secureLocalStorage from "react-secure-storage";
-import HomeSlider from "../../dashboard/_components/HomeSlider";
+import HomeSlider from "../../dashboard/_components/DashboardBanner";
 import MulticitySearchBox from "./MulticitySearchBox";
 import { useGetAirportSearchQuery } from "@/features/airport-search/apis/queries";
 import { airportSearch } from "@/features/airport-search/apis/service";
 import axios from "axios";
 import { getNoticeData } from "@/features/notice/apis/service";
+import PopupSlider from "../../dashboard/_components/PopupSlider";
 
 type MenuItem = {
   name: string;
@@ -617,6 +618,10 @@ const SearchBox = () => {
         </Box>
         <Box mt={3}>
           <HomeSlider />
+        </Box>
+
+        <Box>
+          <PopupSlider />
         </Box>
       </Box>
     </CustomClickAwayListener>
