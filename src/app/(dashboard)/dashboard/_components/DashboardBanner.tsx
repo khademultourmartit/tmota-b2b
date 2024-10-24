@@ -42,7 +42,7 @@ function DashboardBanner() {
           position: "absolute",
           height: "100%",
           right: "-20px",
-          top: "-100px",
+          top: "0px",
           zIndex: 1,
           display: "flex",
           alignItems: "center",
@@ -74,7 +74,7 @@ function DashboardBanner() {
           position: "absolute",
           height: "100%",
           left: "-20px",
-          top: "-100px",
+          top: "0px",
           zIndex: 1,
           display: "flex",
           alignItems: "center",
@@ -148,6 +148,7 @@ function DashboardBanner() {
         display: { md: `${len > 3 ? "block" : "flex"}` },
         justifyContent: { md: `${len > 3 ? "start" : "center"}` },
       }}
+      className={"popupSlider"}
     >
       {!isLoading ? (
         <>
@@ -172,11 +173,12 @@ function DashboardBanner() {
                     <Box
                       sx={{
                         backgroundImage: `url(${data?.imgUrl})`,
-                        width: "95%",
+                        width: "97%",
                         height: "200px",
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "bottom",
+                        margin: "0 auto",
                       }}
                     ></Box>
                   </Box>

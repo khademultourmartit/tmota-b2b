@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useGetPopupQuery } from "@/features/banner/apis/queries";
 import Slider from "react-slick";
 import Image from "next/image";
+import "../../../../scss/dashboard/popup.scss";
 
 const style = {
   position: "absolute",
@@ -21,10 +22,14 @@ const style = {
 };
 
 const PopupSlider = () => {
+  const url = window.location.pathname.replace(/^\/+/, "");
+  const capitalizedUrl = url.charAt(0).toUpperCase() + url.slice(1);
+
   const params = {
     page: "1",
     limit: "20",
     type: "PopUp",
+    location: capitalizedUrl,
   };
 
   const { data, isLoading, isError } = useGetPopupQuery(params);
@@ -65,32 +70,14 @@ const PopupSlider = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} style={{ position: "relative" }}>
-          <CloseIcon
-            sx={{
-              position: "absolute",
-              right: { md: "60px", sm: "50px", xs: "38px" },
-              top: { md: "45px", sm: "45px", xs: "42px" },
-              zIndex: "999",
-              color: "#fff",
-              cursor: "pointer",
-              background: "#882C41",
-              borderRadius: "50%",
-            }}
-            onClick={closeModal}
-          />
+          <CloseIcon className="close-icon" onClick={closeModal} />
           <Box className="popupSlider">
             <Slider {...settings}>
               {data?.payload?.data?.map((item: any, index: any) => (
                 <Box key={index}>
                   <Box
-                    sx={{
-                      backgroundImage: `url(${item?.imgUrl})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                      width: "100%",
-                      aspectRatio: "16/9",
-                    }}
+                    className="popup-bg-image"
+                    style={{ backgroundImage: `url(${item?.imgUrl})` }}
                   ></Box>
                 </Box>
               ))}

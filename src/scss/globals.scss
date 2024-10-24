@@ -65,11 +65,13 @@ a {
 
 .return-date-count {
   position: absolute;
-  top: 360px;
-  left: -102px;
   z-index: 9999;
   width: 665px;
-  background-color: #9493bd;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 90%;
+  margin: 0 auto;
+  transform: translateX(0);
 }
 
 .rdrNextPrevButton {

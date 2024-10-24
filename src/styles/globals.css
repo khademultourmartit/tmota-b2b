@@ -165,8 +165,8 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #000000 !important; /* Sets the text color */
-  background-color: transparent !important; /* Ensures the background color is transparent */
+  -webkit-text-fill-color: #000000 !important;
+  background-color: transparent !important;
 }
 
 .customInput input {
