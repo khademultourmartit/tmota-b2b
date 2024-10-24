@@ -22,14 +22,14 @@ const style = {
 };
 
 const PopupSlider = () => {
-  const url = window.location.pathname.replace(/^\/+/, "");
-  const capitalizedUrl = url.charAt(0).toUpperCase() + url.slice(1);
+  // const url = window.location.pathname.replace(/^\/+/, "");
+  // const capitalizedUrl = url.charAt(0).toUpperCase() + url.slice(1);
 
   const params = {
     page: "1",
     limit: "20",
     type: "PopUp",
-    location: capitalizedUrl,
+    // location: capitalizedUrl,
   };
 
   const { data, isLoading, isError } = useGetPopupQuery(params);
