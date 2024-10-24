@@ -17,7 +17,7 @@ const style = {
   width: { md: "65vw", sm: "80vw", xs: "100vw" },
   px: { md: 4, sm: 4, xs: 4 },
   py: { md: 4, sm: 4, xs: 5 },
-  borderRadius: "4px",
+  borderRadius: "5px",
   outline: "none",
 };
 
